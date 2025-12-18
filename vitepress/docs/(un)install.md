@@ -9,7 +9,7 @@ titleTemplate: 安装卸载
 
 ### 直接下载
 
-[前往下载](../download.md)
+[前往下载](https://github.com/STranslate/STranslate/releases)
 
 ### Scoop
 
