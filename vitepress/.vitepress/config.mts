@@ -1,11 +1,10 @@
 import { defineConfig } from "vitepress";
 import { zh } from "./lang/zh";
-import { en } from "./lang/en";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "STranslate",
-  description: "WPF 开发的一款即开即用、即用即走的翻译(OCR)工具",
+  title: "STranslate 2.0",
+  description: "WPF 开发的一款即开即用、即用即走的翻译(OCR)工具「插件系统」",
   head: [["link", { rel: "icon", type: "image/x-icon", href: "/logo/favicon.ico" }]],
   themeConfig: {
     logo: "/logo/logo.svg",
@@ -30,30 +29,13 @@ export default defineConfig({
                 },
               },
             },
-          },
-          en: {
-            translations: {
-              button: {
-                buttonText: "Search docs",
-                buttonAriaLabel: "Search docs",
-              },
-              modal: {
-                noResultsText: "No recent searches",
-                resetButtonTitle: "Clear the search criteria",
-                footer: {
-                  selectText: "to select",
-                  navigateText: "to navigate",
-                  closeText: "to close",
-                },
-              },
-            },
-          },
+          }
         },
       },
     },
 
     socialLinks: [
-      { icon: "github", link: "https://github.com/ZGGSONG/STranslate" },
+      { icon: "github", link: "https://github.com/STranslate/STranslate" },
     ],
   },
   locales: {
@@ -61,11 +43,6 @@ export default defineConfig({
       label: "中文",
       lang: "zh",
       ...zh,
-    },
-    en: {
-      label: "English",
-      lang: "en",
-      ...en,
-    },
+    }
   },
 });
