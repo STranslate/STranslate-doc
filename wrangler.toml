@@ -1,0 +1,4 @@
+name = "stranslate-doc"
+compatibility_date = "2025-12-19"
+pages_build_output_dir = "vitepress/.vitepress/dist"
+
