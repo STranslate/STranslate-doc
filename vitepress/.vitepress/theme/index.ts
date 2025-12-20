@@ -17,7 +17,7 @@ export default {
         
         // Obtain configuration from: https://giscus.app/
         giscusTalk({
-            repo: 'ZGGSONG/STranslate',
+            repo: 'STranslate/STranslate',
             repoId: 'R_kgDOIoiRPg',
             category: 'Announcements', // default: `General`
             categoryId: 'DIC_kwDOIoiRPs4CeRJD',
