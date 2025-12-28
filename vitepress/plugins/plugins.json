@@ -1,0 +1,14 @@
+[
+  "STranslate.Plugin.Translate.Ali",
+  "STranslate.Plugin.Translate.DeepLX",
+  "STranslate.Plugin.Translate.Gemini",
+  "STranslate.Plugin.Translate.GoogleWebsite",
+  "STranslate.Plugin.Translate.QwenMt",
+  "STranslate.Plugin.Ocr.Paddle",
+  "STranslate.Plugin.Ocr.Gemini",
+  "STranslate.Plugin.Vocabulary.Maimemo",
+  "ybhgl/STranslate.Plugin.Translate.Volcengine",
+  "ybhgl/STranslate.Plugin.Ocr.Volcengine",
+  "yaonet/STranslate.Plugin.Translate.AzureTranslator",
+  "monbed/STranslate.Plugin.Translate.DeepSeek"
+]

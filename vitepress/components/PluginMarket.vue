@@ -8,12 +8,22 @@ const props = defineProps({
   }
 })
 
-const GITHUB_ORG = 'STranslate'
+const DEFAULT_ORG = 'STranslate'
 
 const allPlugins = ref([])
 const loading = ref(true)
 const searchQuery = ref('')
 const selectedCategory = ref('All')
+
+const MIRROR_OPTIONS = [
+  { label: 'GitHub 原站', value: '' },
+  { label: 'GHProxy.com', value: 'https://mirror.ghproxy.com/' },
+  { label: 'GHProxy.net', value: 'https://ghproxy.net/' },
+  { label: '自定义源', value: 'custom' }
+]
+
+const selectedMirror = ref('')
+const customMirror = ref('')
 
 const TABS = [
   { key: 'All', label: '全部' },
@@ -44,30 +54,39 @@ const filteredPlugins = computed(() => {
   )
 })
 
-async function fetchPluginInfo(repoName) {
+async function fetchPluginInfo(repoEntry) {
   try {
-    const pluginJsonUrl = `https://raw.githubusercontent.com/${GITHUB_ORG}/${repoName}/main/${repoName}/plugin.json`
+    let owner = DEFAULT_ORG
+    let repoName = repoEntry
+
+    if (repoEntry.includes('/')) {
+      const parts = repoEntry.split('/')
+      owner = parts[0]
+      repoName = parts[1]
+    }
+
+    const baseUrl = `https://raw.githubusercontent.com/${owner}/${repoName}/main/${repoName}`
+    const pluginJsonUrl = `${baseUrl}/plugin.json`
+    
     const pluginJsonRes = await fetch(pluginJsonUrl)
     const pluginInfo = await pluginJsonRes.json()
 
-    // 简单的版本号获取，实际生产建议加缓存或错误处理
-    // const releaseUrl = `https://api.github.com/repos/${GITHUB_ORG}/${repoName}/releases/latest`
-    // const releaseRes = await fetch(releaseUrl)
-    // const releaseInfo = await releaseRes.json()
-
-    const downloadUrl = `https://github.com/${GITHUB_ORG}/${repoName}/releases/download/${pluginInfo.Version}/${repoName}.spkg`
-    const iconUrl = `https://raw.githubusercontent.com/${GITHUB_ORG}/${repoName}/main/${repoName}/icon.png`
+    const downloadUrl = `https://github.com/${owner}/${repoName}/releases/download/${pluginInfo.Version}/${repoName}.spkg`
+    const iconUrl = `${baseUrl}/icon.png`
 
     return {
       ...pluginInfo,
       repoName,
+      fullRepoName: repoEntry,
+      owner,
       downloadUrl,
       iconUrl,
-      Website: `https://github.com/${GITHUB_ORG}/${repoName}`,
-      type: repoName.split('.')[2]
+      Website: `https://github.com/${owner}/${repoName}`,
+      type: repoName.split('.')[2],
+      isOfficial: owner === DEFAULT_ORG
     }
   } catch (error) {
-    console.error(`Failed to fetch ${repoName}:`, error)
+    console.error(`Failed to fetch ${repoEntry}:`, error)
     return null
   }
 }
@@ -77,7 +96,23 @@ function handleImageError(e) {
 }
 
 function downloadPlugin(url) {
-  window.location.href = url
+  let prefix = selectedMirror.value
+  
+  if (prefix === 'custom') {
+    prefix = customMirror.value.trim()
+  }
+  
+  if (!prefix) {
+    window.location.href = url
+    return
+  }
+
+  // 确保前缀以 / 结尾（如果非空）
+  if (!prefix.endsWith('/')) {
+    prefix += '/'
+  }
+  
+  window.location.href = `${prefix}${url}`
 }
 
 onMounted(async () => {
@@ -92,16 +127,34 @@ onMounted(async () => {
 
 <template>
   <div class="market-container">
-    <div class="search-wrapper">
-      <div class="search-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    <div class="toolbar">
+      <div class="search-wrapper">
+        <div class="search-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+        <input 
+          type="text" 
+          v-model="searchQuery" 
+          placeholder="搜索插件 (名称、描述、作者)..."
+          class="search-input"
+        >
       </div>
-      <input 
-        type="text" 
-        v-model="searchQuery" 
-        placeholder="搜索插件 (名称、描述、作者)..."
-        class="search-input"
-      >
+      
+      <div class="source-control">
+        <select v-model="selectedMirror" class="mirror-select" title="选择下载镜像源">
+          <option v-for="opt in MIRROR_OPTIONS" :key="opt.label" :value="opt.value">
+            {{ opt.label }}
+          </option>
+        </select>
+        
+        <input 
+          v-if="selectedMirror === 'custom'"
+          type="text" 
+          v-model="customMirror"
+          placeholder="输入镜像前缀 (如 https://mirror.ghproxy.com/)"
+          class="custom-mirror-input"
+        >
+      </div>
     </div>
 
     <div class="category-tabs">
@@ -136,13 +189,23 @@ onMounted(async () => {
 
     <!-- Plugin List -->
     <div v-else-if="filteredPlugins.length > 0" class="plugins-grid">
-      <div v-for="plugin in filteredPlugins" :key="plugin.repoName" class="plugin-card">
+      <div v-for="plugin in filteredPlugins" :key="plugin.fullRepoName" class="plugin-card">
         <div class="card-header">
           <img :src="plugin.iconUrl" :alt="plugin.Name" class="plugin-icon" @error="handleImageError">
           <div class="header-content">
-            <h3 class="plugin-title">{{ plugin.Name }}</h3>
+            <div class="title-row">
+              <h3 class="plugin-title">{{ plugin.Name }}</h3>
+              <span v-if="plugin.isOfficial" class="badge official" title="官方维护">
+                <svg class="badge-icon" viewBox="0 0 24 24" width="12" height="12"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                官方
+              </span>
+              <span v-else class="badge community" title="社区贡献">
+                <svg class="badge-icon" viewBox="0 0 24 24" width="12" height="12"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 21v-2a4 4 0 0 0-3-3.87" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 3.13a4 4 0 0 1 0 7.75" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                社区
+              </span>
+            </div>
             <div class="plugin-meta">
-              <span class="author">@{{ plugin.Author }}</span>
+              <span class="author" :title="plugin.owner">@{{ plugin.Author }}</span>
               <span class="version">v{{ plugin.Version }}</span>
             </div>
           </div>
@@ -175,10 +238,20 @@ onMounted(async () => {
   margin: 2rem 0;
 }
 
+/* Toolbar */
+.toolbar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 /* Search */
 .search-wrapper {
   position: relative;
-  margin-bottom: 2rem;
+  flex: 1;
+  min-width: 280px;
 }
 
 .search-icon {
@@ -206,6 +279,47 @@ onMounted(async () => {
   border-color: var(--vp-c-brand);
   box-shadow: 0 0 0 2px var(--vp-c-brand-dimm);
   outline: none;
+}
+
+/* Source Control */
+.source-control {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.mirror-select, .custom-mirror-input {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-alt);
+  color: var(--vp-c-text-1);
+  font-size: 14px;
+  transition: all 0.2s;
+  height: 42px; /* Match search input height approx */
+}
+
+.mirror-select {
+  cursor: pointer;
+  min-width: 140px;
+  appearance: none; /* Remove default arrow */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px;
+  padding-right: 32px;
+}
+
+.mirror-select:focus, .custom-mirror-input:focus {
+  border-color: var(--vp-c-brand);
+  box-shadow: 0 0 0 2px var(--vp-c-brand-dimm);
+  outline: none;
+}
+
+.custom-mirror-input {
+  flex: 1;
+  min-width: 200px;
 }
 
 /* Tabs */
@@ -290,8 +404,51 @@ onMounted(async () => {
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--vp-c-text-1);
-  margin: 0 0 0.25rem 0;
+  margin: 0;
   line-height: 1.3;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 20px;
+  border: 1px solid transparent;
+}
+
+.badge-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.badge.official {
+  background-color: var(--vp-c-brand-dimm);
+  color: var(--vp-c-brand-1);
+  border-color: rgba(var(--vp-c-brand-rgb), 0.2);
+}
+
+.badge.community {
+  background-color: rgba(234, 179, 8, 0.15);
+  color: #d97706;
+  border-color: rgba(234, 179, 8, 0.2);
+}
+
+.dark .badge.community {
+  background-color: rgba(234, 179, 8, 0.15);
+  color: #fbbf24;
+  border-color: rgba(234, 179, 8, 0.2);
 }
 
 .plugin-meta {

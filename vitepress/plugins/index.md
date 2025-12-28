@@ -4,17 +4,7 @@ layout: page
 
 <script setup>
 import PluginMarket from '../components/PluginMarket.vue'
-
-const plugins = [
-  'STranslate.Plugin.Translate.Ali',
-  'STranslate.Plugin.Translate.DeepLX',
-  'STranslate.Plugin.Translate.Gemini',
-  'STranslate.Plugin.Translate.GoogleWebsite',
-  'STranslate.Plugin.Translate.QwenMt',
-  'STranslate.Plugin.Ocr.Paddle',
-  'STranslate.Plugin.Ocr.Gemini',
-  'STranslate.Plugin.Vocabulary.Maimemo'
-]
+import plugins from './plugins.json'
 </script>
 
 <div class="market-page">
@@ -28,7 +18,7 @@ const plugins = [
 ## 如何安装
 
 1. 点击上方卡片中的 **下载** 按钮获取 `.spkg` 文件。
-2. 打开 STranslate 软件，进入 **设置 > 服务 > 插件**。
+2. 打开 STranslate 软件，进入 **设置 > 插件**。
 3. 将下载的文件拖入窗口即可安装。
 
 </div>
