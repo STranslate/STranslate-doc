@@ -65,11 +65,31 @@ async function fetchPluginInfo(repoEntry) {
       repoName = parts[1]
     }
 
-    const baseUrl = `https://raw.githubusercontent.com/${owner}/${repoName}/main/${repoName}`
-    const pluginJsonUrl = `${baseUrl}/plugin.json`
-    
-    const pluginJsonRes = await fetch(pluginJsonUrl)
-    const pluginInfo = await pluginJsonRes.json()
+    // Try main then master
+    const branches = ['main', 'master']
+    let pluginInfo = null
+    let baseUrl = ''
+
+    for (const branch of branches) {
+      try {
+        // Check subfolder structure first (standard for STranslate plugins)
+        baseUrl = `https://raw.githubusercontent.com/${owner}/${repoName}/${branch}/${repoName}`
+        const pluginJsonUrl = `${baseUrl}/plugin.json`
+        const res = await fetch(pluginJsonUrl)
+        
+        if (res.ok) {
+          pluginInfo = await res.json()
+          break
+        }
+      } catch (e) {
+        continue
+      }
+    }
+
+    if (!pluginInfo) {
+      console.warn(`Failed to fetch plugin.json for ${repoEntry}`)
+      return null
+    }
 
     // 尝试获取最新 Release Tag
     let version = pluginInfo.Version
