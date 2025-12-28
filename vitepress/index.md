@@ -18,13 +18,21 @@ hero:
       link: /docs/
 
 features:
-  - title: 翻译
-    details: 支持多种翻译语言，支持输入、划词、截图、监听鼠标划词等多种翻译方式，支持同时显示多个服务翻译结果，方便比较翻译结果
-  - title: OCR
-    details: 支持中英日韩完全离线OCR，基于 PaddleOCR，效果优秀反应迅速，支持截图、剪贴板、文件OCR，支持静默OCR，同时支持微信、百度、腾讯、OpenAI、Google等OCR
-  - title: 插件
-    details: 支持OpenAI、Gemini、ChatGLM、百度、微软、腾讯、有道、阿里等十多家官方提供翻译服务接入，同时提供插件系统「<a href="https://nuget.org/">STranslate.Plugin</a>」拓展任何自定义服务
-  - title: 特色
-    details: 支持TTS和生词本插件服务拓展软件能力，支持回译、全局TTS、写作(选中后直接翻译替换内容)、自定义Prompt、二维码识别、外部调用等等
+  - title: 多源翻译
+    details: 集成 OpenAI、Gemini、DeepL、Google 等数十种翻译服务，支持并发请求，一次查询获取多家结果，轻松对比优劣。
+  - title: 智能 OCR
+    details: 内置微信 OCR 引擎，无需联网即可精准识别；支持图片翻译，智能还原排版，直接在原图位置呈现译文，所见即所得。
+  - title: 划词交互
+    details: 支持鼠标划词、快捷键取词等多种触发方式，配合静默翻译模式，实现即用即走，无缝融入日常工作流。
+  - title: 插件生态
+    details: 基于 .NET 的强大插件架构，官方与社区提供丰富插件，不仅限于翻译，更能拓展 TTS、OCR 及各类自定义服务。
+  - title: AI 助手
+    details: 支持自定义 Prompt（提示词），可利用大模型进行文本润色、内容总结、代码解释或语法纠错，化身你的全能 AI 助手。
+  - title: 语音服务
+    details: 集成 Microsoft Edge TTS 等高质量语音合成引擎，支持多国语言朗读，语速、音调可调，听力练习的好帮手。
+  - title: 生词管理
+    details: 内置生词本功能，一键收藏重点词汇，支持本地备份与恢复，帮助你构建个人词汇库，随时回顾复习。
+  - title: 实用工具
+    details: 支持二维码识别、历史记录查看、全局热键设置、明暗主题切换及外部调用接口，细节打磨，极致体验。
 ---
 

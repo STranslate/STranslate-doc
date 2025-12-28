@@ -3,7 +3,7 @@ layout: page
 ---
 
 <script setup>
-import PluginMarket from '../components/PluginMarket.vue'
+import PluginMarket from './components/PluginMarket.vue'
 import plugins from './plugins.json'
 </script>
 
