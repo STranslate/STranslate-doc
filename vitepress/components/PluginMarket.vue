@@ -16,9 +16,9 @@ const searchQuery = ref('')
 const selectedCategory = ref('All')
 
 const MIRROR_OPTIONS = [
-  { label: 'GitHub 原站', value: '' },
-  { label: 'GHProxy.com', value: 'https://mirror.ghproxy.com/' },
-  { label: 'GHProxy.net', value: 'https://ghproxy.net/' },
+  { label: 'github', value: '' },
+  { label: 'mirror.ghroxy.com', value: 'https://mirror.ghproxy.com/' },
+  { label: 'ghroxy.net', value: 'https://ghproxy.net/' },
   { label: '自定义源', value: 'custom' }
 ]
 
@@ -89,6 +89,22 @@ async function fetchPluginInfo(repoEntry) {
     if (!pluginInfo) {
       console.warn(`Failed to fetch plugin.json for ${repoEntry}`)
       return null
+    }
+
+    // Pull zh-cn localization when available to surface translated name/description
+    try {
+      const zhUrl = `${baseUrl}/Languages/zh-cn.json`
+      const zhRes = await fetch(zhUrl)
+      if (zhRes.ok) {
+        const zhInfo = await zhRes.json()
+        pluginInfo = {
+          ...pluginInfo,
+          Name: zhInfo.Name || pluginInfo.Name,
+          Description: zhInfo.Description || pluginInfo.Description
+        }
+      }
+    } catch (e) {
+      // ignore localization errors, keep default pluginInfo
     }
 
     const downloadUrl = `https://github.com/${owner}/${repoName}/releases/download/v${pluginInfo.Version}/${repoName}.spkg`
