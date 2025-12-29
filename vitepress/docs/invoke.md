@@ -28,8 +28,6 @@ curl 127.0.0.1:50020/translate -Method POST -Body $encode_text -UseBasicParsing
 
 ![3](/img/snipdo_3.png)
 
-![3_1](/img/snipdo_3_1.png)
-
 ![4](/img/snipdo_4.png)
 
 
