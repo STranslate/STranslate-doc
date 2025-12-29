@@ -1,71 +1,44 @@
-## 构建
+## 提交插件
 
-- 前端环境
-	- Node.js(>=18.20.1)
-	- Npm(>=10.5.0)/Yarn(>=v1.22.22)
-- 开发工具
-	- VsCode
+欢迎提交您的插件到 STranslate 插件市场！请遵循以下步骤：
 
-### 安装前端环境
+### 1. 准备插件仓库
 
-> 推荐使用 [nvm](https://github.com/coreybutler/nvm-windows) 安装配置 Node.js，详细教程可参考 [windows](https://juejin.cn/post/7093787595951308836)、[macos](https://blog.csdn.net/CaptainJava/article/details/83866880)
+确保您的插件托管在公开的 GitHub 仓库中，并符合以下目录结构：
+> 正常使用只需要从 [STranslate Org](https://github.com/STranslate) 复制一个同类型的项目修改元数据
+> - `plugin.json` 里的 `PluginID`, `ExecuteFileName`, `Version` 一定要结合实际情况更新
+> - 其他根据插件自身情况考虑更新即可
 
-安装好`nvm`之后使用`cmd`安装`Node.js(18.20.1)`
-
-<details>
-
-<summary>网络不好的话请换源</summary>
-
-阿里源
-```shell
-nvm npm_mirror https://npmmirror.com/mirrors/npm/
-nvm node_mirror https://npmmirror.com/mirrors/node/
+```text
+RepoName/ (仓库根目录)
+├── RepoName/ (项目目录，需与仓库名一致)
+│   ├── plugin.json  (插件元数据)
+│   ├── icon.png     (插件图标)
+│   └── ...
+└── ...
 ```
 
-其他源：[nvm 切换国内镜像](https://nvm.p6p.net/use/mirror.html)
+### 2. 规范发布 (Release)
 
-</details>
+在 GitHub 发布 Release 时，请务必遵守以下规范，否则插件市场无法正确识别下载链接：
 
-```shell
-# 安装 nodejs
-nvm install 18.20.1
+> 正常使用组织下仓库 Copy 修改只需要打 Tag (必须以 `v` 开头, 比如 `v1.0.0`)并推送到远端即可触发 `Github Actions` 自动打包发布
 
-# 等待结束
+*   **Tag 版本号**：必须以 `v` 开头，例如 `v1.0.0`。
+*   **构建产物**：请上传打包好的 `.spkg` 文件到 Release Assets 中。
+*   **文件名**：`.spkg` 文件名必须与仓库名一致（例如 `STranslate.Plugin.Demo.spkg`）。
 
-# 使用 nodejs
-nvm use 18.20.1
+### 3. 提交收录
 
-# 检查版本
-node -v
-# 输出：v18.20.1
+1.  Fork 本仓库。
+2.  编辑 `vitepress/plugins.json` 文件。
+3.  在数组中添加您的仓库路径，格式为 `"用户名/仓库名"`。
+    ```json
+    [
+      "STranslate.Plugin.Translate.DeepLX",
+      "YourName/YourRepoName" 
+    ]
+    ```
+4.  提交 Pull Request。
 
-npm -v
-# 输出：10.5.0
-```
-
-### 编译项目
-
-`VsCode`打开项目文件夹使用`Ctrl`+`J`/`Command`+`J`打开终端进行编译
-
-```shell
-# 开始编译，网不好的话请尝试配置代理或者参考上面换源
-npm run dev
-
-# 编译成功查看输出
- vitepress v1.0.0-rc.45
-
-  ➜  Local:   http://localhost:5173/
-  ➜  Network: use --host to expose
-  ➜  press h to show help
-```
-
-### 预览编译效果
-
-根据编译输出结果浏览器访问 `http://localhost:5173/` 即可看到网页内容
-
-
----
-
-### 提交 PR
-
-[Bilibili](https://www.bilibili.com/video/BV1Qp4y1T797)
+等待审核通过后，您的插件将自动出现在插件市场中。

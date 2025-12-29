@@ -91,25 +91,8 @@ async function fetchPluginInfo(repoEntry) {
       return null
     }
 
-    // 尝试获取最新 Release Tag
-    let version = pluginInfo.Version
-    try {
-      const releaseUrl = `https://api.github.com/repos/${owner}/${repoName}/releases/latest`
-      const releaseRes = await fetch(releaseUrl)
-      if (releaseRes.ok) {
-        const releaseInfo = await releaseRes.json()
-        version = releaseInfo.tag_name
-      }
-    } catch (e) {
-      // API 限制或网络错误，回退使用 plugin.json 中的版本
-      console.warn(`Fetch release failed for ${repoName}, fallback to plugin.json version.`)
-    }
-
-    const downloadUrl = `https://github.com/${owner}/${repoName}/releases/download/${version}/${repoName}.spkg`
+    const downloadUrl = `https://github.com/${owner}/${repoName}/releases/download/v${pluginInfo.Version}/${repoName}.spkg`
     const iconUrl = `${baseUrl}/icon.png`
-    
-    // UI 显示版本号：统一去掉 v 前缀
-    const displayVersion = version.startsWith('v') ? version.substring(1) : version
 
     return {
       ...pluginInfo,
@@ -120,8 +103,7 @@ async function fetchPluginInfo(repoEntry) {
       iconUrl,
       Website: `https://github.com/${owner}/${repoName}`,
       type: repoName.split('.')[2],
-      isOfficial: owner === DEFAULT_ORG,
-      displayVersion
+      isOfficial: owner === DEFAULT_ORG
     }
   } catch (error) {
     console.error(`Failed to fetch ${repoEntry}:`, error)
@@ -244,7 +226,7 @@ onMounted(async () => {
             </div>
             <div class="plugin-meta">
               <span class="author" :title="plugin.owner">@{{ plugin.Author }}</span>
-              <span class="version">v{{ plugin.displayVersion }}</span>
+              <span class="version">v{{ plugin.Version }}</span>
             </div>
           </div>
         </div>
