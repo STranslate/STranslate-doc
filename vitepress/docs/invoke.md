@@ -34,7 +34,6 @@ curl 127.0.0.1:50020/translate -Method POST -Body $encode_text -UseBasicParsing
 # Api调用
 
 > `/` 与 `/translate` 相同
-
 1. `/translate`
     - `GET`: 输入翻译
     - `POST` `$content`: 立即翻译内容
@@ -47,21 +46,23 @@ curl 127.0.0.1:50020/translate -Method POST -Body $encode_text -UseBasicParsing
     - `POST` `$filepath`: 识别图片文字并翻译
 5. `/translate_crossword` `GET`: 划词翻译
 6. `/translate_mousehook` `GET`: 打开/关闭监听鼠标划词
-7. `/translate_replace` `GET`: 执行替换翻译
-8. `/listenclipboard` `GET`: 打开/关闭监听剪贴板
-9. `/ocr`:
+7. `/translate_replace` `GET`: 对选中文本执行替换翻译
+8. `/ocr`:
     - `GET`: 截图OCR
     - `POST` `$filepath`: 识别图片文字
-10. `/ocr_silence`:
+9. `/ocr_silence`:
     - `GET`: 静默截图OCR
-    - `POST`: 静默识别图片文字并复制到剪贴板
-11. `/ocr_qrcode`:
+    - `POST` `$filepath`: 静默识别图片文字并复制到剪贴板
+10. `/ocr_qrcode`:
     - `GET`: 截图识别二维码
-    - `POST`: 识别图片二维码
-12. `/open_window` `GET`: 打开主界面
-13. `/open_preference` `GET`: 打开设置界面
-14. `/open_history` `GET`: 打开历史记录页面
-15. `/forbiddenhotkey` `GET`: 禁用/启用全局热键
+    - `POST` `$filepath`: 识别图片二维码
+11. `/open_window` `GET`: 打开主界面
+12. `/open_preference` `GET`: 打开设置界面
+13. `/open_history` `GET`: 打开历史记录页面
+14. `/forbiddenhotkey` `GET`: 禁用/启用全局热键
+15. `tts_silence`:
+    - `GET`: 静默朗读选中文本
+    - `POST` `$content`: 静默朗读内容
 
 翻译示例:
 
