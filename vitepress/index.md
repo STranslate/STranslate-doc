@@ -11,10 +11,13 @@ hero:
     alt: STranslate
   actions:
     - theme: brand
-      text: 立即下载
+      text: ⬇️ 立即下载
       link: https://github.com/STranslate/STranslate/releases
     - theme: alt
-      text: 使用说明
+      text: 🧩 插件市场
+      link: /plugins
+    - theme: alt
+      text: 📖 使用说明
       link: /docs/
 
 features:
