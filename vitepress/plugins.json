@@ -2,6 +2,7 @@
   "STranslate.Plugin.Translate.Ali",
   "STranslate.Plugin.Translate.DeepLX",
   "STranslate.Plugin.Translate.Gemini",
+  "STranslate.Plugin.Translate.Claude",
   "STranslate.Plugin.Translate.GoogleWebsite",
   "STranslate.Plugin.Translate.QwenMt",
   "STranslate.Plugin.Ocr.Paddle",
