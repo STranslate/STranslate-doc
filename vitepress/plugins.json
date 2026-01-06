@@ -1,4 +1,5 @@
 [
+  "STranslate.Plugin.Translate.OpenRouter",
   "STranslate.Plugin.Translate.Ali",
   "STranslate.Plugin.Translate.DeepLX",
   "STranslate.Plugin.Translate.Gemini",
