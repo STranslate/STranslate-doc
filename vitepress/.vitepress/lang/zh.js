@@ -18,7 +18,7 @@ export const zh = {
           text: "主要内容",
           link: "/docs/",
           items: [
-            // { text: "插件系统", link: "/docs/plugin" },
+            { text: "插件系统", link: "/docs/plugin" },
             { text: "集成调用", link: "/docs/invoke" },
             { text: "安装卸载", link: "/docs/(un)install" },
             { text: "FAQ", link: "/docs/faq" },
