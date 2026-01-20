@@ -12,5 +12,6 @@
   "monbed/STranslate.Plugin.Translate.DeepSeek",
   "ybhgl/STranslate.Plugin.Translate.Volcengine",
   "yaonet/STranslate.Plugin.Translate.AzureTranslator",
-  "ybhgl/STranslate.Plugin.Ocr.Volcengine"
+  "ybhgl/STranslate.Plugin.Ocr.Volcengine",
+  "konosubakonoakua/STranslate.Plugin.Translate.Ollama"
 ]
