@@ -5,6 +5,13 @@ titleTemplate: 主要内容
 
 # 主要功能
 
+## 增量翻译
+
+1. 配置增量翻译全局热键
+2. 按住指定按键激活窗口，鼠标滑词选中文本即可添加至翻译窗口，重复选择即可持续添加，松开按键即执行翻译
+
+<img height="540" alt="image" src="/img/incremental_translation.gif" />
+
 ## 图片翻译
 
 1. 配置图片翻译服务
@@ -42,7 +49,7 @@ titleTemplate: 主要内容
 
 ## 打赏
 
-觉得不错的话可以请作者喝杯阔落
+觉得不错的话可以请作者喝杯阔落，[打赏列表](https://github.com/STranslate/STranslate/blob/main/Sponsor.md)
 
 | 微信 | 支付宝 |
 | :--: | :--: |
