@@ -6,7 +6,6 @@
   "STranslate.Plugin.Translate.Claude",
   "STranslate.Plugin.Translate.GoogleWebsite",
   "STranslate.Plugin.Translate.QwenMt",
-  "STranslate.Plugin.Ocr.PaddleOnnx",
   "STranslate.Plugin.Ocr.Paddle",
   "STranslate.Plugin.Ocr.Gemini",
   "STranslate.Plugin.Vocabulary.Maimemo",
