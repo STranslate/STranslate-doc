@@ -1,4 +1,5 @@
 [
+  "STranslate.Plugin.Translate.Ollama",
   "STranslate.Plugin.Translate.OpenRouter",
   "STranslate.Plugin.Translate.Ali",
   "STranslate.Plugin.Translate.DeepLX",
@@ -12,6 +13,5 @@
   "monbed/STranslate.Plugin.Translate.DeepSeek",
   "ybhgl/STranslate.Plugin.Translate.Volcengine",
   "yaonet/STranslate.Plugin.Translate.AzureTranslator",
-  "ybhgl/STranslate.Plugin.Ocr.Volcengine",
-  "konosubakonoakua/STranslate.Plugin.Translate.Ollama"
+  "ybhgl/STranslate.Plugin.Ocr.Volcengine"
 ]
