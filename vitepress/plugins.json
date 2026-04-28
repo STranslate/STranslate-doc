@@ -16,5 +16,7 @@
   "yaonet/STranslate.Plugin.Translate.AzureTranslator",
   "ybhgl/STranslate.Plugin.Ocr.Volcengine",
   "el-psy-k/STranslate.Plugin.Translate.SiliconFlow",
-  "Rockytkg/STranslate.Plugin.Tts.MiMo"
+  "Rockytkg/STranslate.Plugin.Tts.MiMo",
+  "Cirnouo/STranslate.Plugin.Tts.Vocu",
+  "Cirnouo/STranslate.Plugin.Tts.FishAudio"
 ]
