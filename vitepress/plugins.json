@@ -18,5 +18,6 @@
   "el-psy-k/STranslate.Plugin.Translate.SiliconFlow",
   "Rockytkg/STranslate.Plugin.Tts.MiMo",
   "Cirnouo/STranslate.Plugin.Tts.Vocu",
-  "Cirnouo/STranslate.Plugin.Tts.FishAudio"
+  "Cirnouo/STranslate.Plugin.Tts.FishAudio",
+  "evoke322/STranslate.Plugin.Translate.NiuTrans"
 ]
