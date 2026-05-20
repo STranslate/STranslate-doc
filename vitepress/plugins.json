@@ -15,10 +15,11 @@
   "ybhgl/STranslate.Plugin.Translate.Volcengine",
   "yaonet/STranslate.Plugin.Translate.AzureTranslator",
   "ybhgl/STranslate.Plugin.Ocr.Volcengine",
-  "el-psy-k/STranslate.Plugin.Translate.SiliconFlow",
+  "el-psy-k/STranslate.Plugin.Translate.OpenAICompatible",
   "Rockytkg/STranslate.Plugin.Tts.MiMo",
   "Cirnouo/STranslate.Plugin.Tts.Vocu",
   "Cirnouo/STranslate.Plugin.Tts.FishAudio",
   "evoke322/STranslate.Plugin.Translate.NiuTrans",
-  "evoke322/STranslate.Plugin.Ocr.LongCat"
+  "evoke322/STranslate.Plugin.Ocr.LongCat",
+  "xiangyuw1/STranslate.Plugin.Translate.FreeDict"
 ]
