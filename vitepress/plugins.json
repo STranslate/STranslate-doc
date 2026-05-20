@@ -11,6 +11,7 @@
   "STranslate.Plugin.Ocr.Paddle",
   "STranslate.Plugin.Ocr.Gemini",
   "STranslate.Plugin.Vocabulary.Maimemo",
+  "STranslate.Plugin.Translate.SiliconFlow"
   "monbed/STranslate.Plugin.Translate.DeepSeek",
   "ybhgl/STranslate.Plugin.Translate.Volcengine",
   "yaonet/STranslate.Plugin.Translate.AzureTranslator",
@@ -21,5 +22,6 @@
   "Cirnouo/STranslate.Plugin.Tts.FishAudio",
   "evoke322/STranslate.Plugin.Translate.NiuTrans",
   "evoke322/STranslate.Plugin.Ocr.LongCat",
-  "xiangyuw1/STranslate.Plugin.Translate.FreeDict"
+  "xiangyuw1/STranslate.Plugin.Translate.FreeDict",
+  "xuefliang/STranslate.Plugin.Translate.SiliconFlow"
 ]
