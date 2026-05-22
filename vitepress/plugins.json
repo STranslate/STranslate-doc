@@ -21,5 +21,6 @@
   "Cirnouo/STranslate.Plugin.Tts.FishAudio",
   "evoke322/STranslate.Plugin.Translate.NiuTrans",
   "evoke322/STranslate.Plugin.Ocr.LongCat",
-  "xiangyuw1/STranslate.Plugin.Translate.FreeDict"
+  "xiangyuw1/STranslate.Plugin.Translate.FreeDict",
+  "sean908/STranslate.Plugin.Translate.OpenAICompetitive"
 ]
