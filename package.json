@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vitepress dev vitepress",
     "build": "vitepress build vitepress",
-    "preview": "vitepress preview vitepress"
+    "preview": "vitepress preview vitepress",
+    "validate:plugins": "node scripts/validate-plugins.cjs"
   },
   "dependencies": {
     "axios": "^1.6.8",
