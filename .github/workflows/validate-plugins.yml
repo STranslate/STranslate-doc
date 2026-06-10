@@ -1,0 +1,36 @@
+name: Validate plugins
+
+on:
+  pull_request:
+    paths:
+      - vitepress/plugins.json
+      - scripts/validate-plugins.cjs
+      - .github/workflows/validate-plugins.yml
+  push:
+    paths:
+      - vitepress/plugins.json
+      - scripts/validate-plugins.cjs
+      - .github/workflows/validate-plugins.yml
+
+jobs:
+  validate-plugins:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate plugins
+        run: npm run validate:plugins
+        env:
+          BASE_PLUGINS_REF: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
