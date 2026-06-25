@@ -5,6 +5,12 @@ titleTemplate: 主要内容
 
 # 主要功能
 
+## 欢迎界面
+
+1. 首次使用软件会自动弹出欢迎界面快速配置核心功能
+
+<img height="540" alt="image" src="/img/welcome.png" />
+
 ## 增量翻译
 
 1. 配置增量翻译全局热键
@@ -18,6 +24,12 @@ titleTemplate: 主要内容
 2. 配置文本识别服务
 
 <img height="540" alt="image" src="/img/image_trans.gif" />
+
+## 图片翻译（精简窗口）
+
+1. 设置-独立窗口-图片翻译窗口模式-精简窗口
+
+<img height="540" alt="image" src="/img/image_trans_sim.gif" />
 
 ## 插件安装
 
