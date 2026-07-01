@@ -31,6 +31,10 @@ titleTemplate: 主要内容
 
 <img height="540" alt="image" src="/img/image_trans_sim.gif" />
 
+## 更换服务图标
+
+<img height="540" alt="image" src="/img/update_icon.gif" />
+
 ## 插件安装
 
 将spkg文件拖拽至插件页面即可安装
