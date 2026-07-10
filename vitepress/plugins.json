@@ -22,5 +22,6 @@
   "evoke322/STranslate.Plugin.Translate.NiuTrans",
   "sean908/STranslate.Plugin.Translate.OpenAICompetitive",
   "evoke322/STranslate.Plugin.Tts.Unisound",
-  "evoke322/STranslate.Plugin.Ocr.WindowsNative"
+  "evoke322/STranslate.Plugin.Ocr.WindowsNative",
+  "muutot/STranslate.Plugin.Translate.Tencent"
 ]
