@@ -20,7 +20,6 @@
   "ybhgl/STranslate.Plugin.Ocr.Volcengine",
   "el-psy-k/STranslate.Plugin.Translate.OpenAICompatible",
   "Rockytkg/STranslate.Plugin.Tts.MiMo",
-  "boxi-wangji/STranslate.Plugin.Tts.Dictionary",
   "Cirnouo/STranslate.Plugin.Tts.Vocu",
   "Cirnouo/STranslate.Plugin.Tts.FishAudio",
   "evoke322/STranslate.Plugin.Translate.NiuTrans",
