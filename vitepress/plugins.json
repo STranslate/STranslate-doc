@@ -27,5 +27,6 @@
   "evoke322/STranslate.Plugin.Tts.Unisound",
   "evoke322/STranslate.Plugin.Ocr.WindowsNative",
   "muutot/STranslate.Plugin.Translate.Tencent",
+  "xiangyuw1/STranslate.Plugin.Translate.XiaomiMiMo",
   "xiangyuw1/STranslate.Plugin.Translate.FreeDict"
 ]
