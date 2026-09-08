@@ -15,6 +15,8 @@ import plugins from './plugins.json'
 
 <PluginMarket :repos="plugins" />
 
+<!-- Rebuild the plugin market page after plugins.json-only updates. -->
+
 ## 如何安装
 
 1. 点击上方卡片中的 **下载** 按钮获取 `.spkg` 文件。
