@@ -34,5 +34,6 @@
   "hellonone/STranslate.Plugin.Translate.MicrosoftBingDict",
   "SchweppesSoda/STranslate.Plugin.Translate.Bailian",
   "NianBroken/STranslate.Plugin.Translate.LanguageModel",
-  "NianBroken/STranslate.Plugin.Ocr.VisionModel"
+  "NianBroken/STranslate.Plugin.Ocr.VisionModel",
+  "jarxunlai/STranslate.Plugin.Tts.OpenAICompatible"
 ]
