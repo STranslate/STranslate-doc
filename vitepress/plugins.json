@@ -35,5 +35,6 @@
   "SchweppesSoda/STranslate.Plugin.Translate.Bailian",
   "NianBroken/STranslate.Plugin.Translate.LanguageModel",
   "NianBroken/STranslate.Plugin.Ocr.VisionModel",
+  "jarxunlai/STranslate.Plugin.Tts.OpenAICompatible",
   "SuperShowMaker/STranslate.Plugin.Tts.Qwen3TTS"
 ]
