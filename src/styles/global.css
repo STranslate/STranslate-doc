@@ -526,7 +526,6 @@ code {
   z-index: 1;
 }
 .floating-product img {
-  border-radius: 8px;
   width: 100%;
   box-shadow: var(--shadow);
   background: #f3f3f3;
