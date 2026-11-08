@@ -43,3 +43,5 @@ Marketplace render evidence uses deterministic fixture metadata and fallback ico
 Post-verdict text correction: the mobile rule hides the sample article heading's `<br>`, joining “curiosity.A”. Adding literal whitespace around that break is an appropriate minimal correctness fix: it separates the sentences on mobile and preserves the desktop line break. This does not reopen the visual direction or require another visual review.
 
 Deployment packaging follow-up: original GIFs are retained byte-for-byte in `assets/recordings/`, outside the static public directory. Tutorial fallback links now open the existing MP4. Final build checks all local references and the 25 MiB per-asset size ceiling. This changes packaging, not the reviewed visual composition.
+
+Subsequent user-requested cleanup removed the redundant original GIF archive from the working tree. Production MP4/WebP assets are unchanged; originals remain recoverable from commit `2f22c8cf8b3d3a5b12603f61902dc9c355cff71e`. A fresh production build and link/media checks passed after removal.

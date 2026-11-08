@@ -26,22 +26,22 @@ npm run test:e2e
 - `src/data/plugins.json`：插件仓库清单，保持字符串数组格式。市场在浏览器端请求 GitHub 元数据，不需要 token 或后端。
 - `src/components/`、`src/layouts/`：共享导航、搜索、文档布局和 Vue 插件市场。
 - `src/styles/global.css`：深浅主题变量、响应式布局与组件样式。
-- `public/img/`：产品截图；`public/media/`：实际录屏转码后的 MP4、封面和首页截图；`assets/recordings/`：完整保留的原始 GIF，不进入发布产物。
+- `public/img/`：产品截图；`public/media/`：实际录屏转码后的 MP4、封面和首页截图。
 - `scripts/check-links.mjs`：构建后检查站内链接、标题锚点和媒体文件。文档统一使用新入口，不维护旧地址跳转。
 
 通过 Cloudflare Pages 控制台连接 Git 仓库，并设置：
 
-| 配置项 | 值 |
-| --- | --- |
-| 框架预设 | Astro |
-| 构建命令 | `npm run build` |
-| 构建输出目录 | `dist` |
-| 根目录 | 仓库根目录（留空） |
-| 环境变量 | `NODE_VERSION=24` |
+| 配置项       | 值                 |
+| ------------ | ------------------ |
+| 框架预设     | Astro              |
+| 构建命令     | `npm run build`    |
+| 构建输出目录 | `dist`             |
+| 根目录       | 仓库根目录（留空） |
+| 环境变量     | `NODE_VERSION=24`  |
 
 构建命令请使用 `npm run build`，确保同时生成中文搜索索引并执行链接和文件大小检查。本站为纯静态输出，不需要 `wrangler.toml`、Pages Functions 或服务端适配器。域名在 Astro 配置中统一设置，并生成 canonical 与 sitemap。每篇文档底部的 GitHub 编辑入口指向对应 Markdown 文件。
 
-视频使用显式播放控件、`preload="none"` 和静态封面；原始 GIF 归档在 `assets/recordings/`。更新录屏时，同步更新同名 MP4/WebP 并核对内容适用的软件版本。构建检查所有发布文件不得超过 Cloudflare Pages 的 25 MiB 单文件上限。详细媒体来源见 `.impeccable/media-manifest.md`。
+视频使用显式播放控件、`preload="none"` 和静态封面。原始 GIF 不参与网站运行或构建，已从当前目录移除，必要时可从 Git 历史取回。更新录屏时，同步更新同名 MP4/WebP 并核对内容适用的软件版本。构建检查所有发布文件不得超过 Cloudflare Pages 的 25 MiB 单文件上限。详细媒体来源见 `.impeccable/media-manifest.md`。
 
 ## 提交插件
 

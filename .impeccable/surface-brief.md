@@ -6,14 +6,14 @@ Home mode: Persuade. Documents: Read. Plugin discovery: Operate. Brand: original
 
 Contract seed: e311debb, user-pinned direction takes precedence. No random challenger is applicable to the already approved direction. No repeated direction approval required by the user's implementation request.
 
-| Ingredient | Medium and commitment |
-| --- | --- |
-| Header, headline, download, search | Semantic HTML, authored SVG icons, CSS; text stays live |
-| English reading scene | Semantic article; demo copy explicitly labeled; purple selection is static, actual text can be selected |
-| Floating translation window | Authentic crop from repository recording, `public/media/hero-translation.webp`; no fabricated UI |
-| OCR feature | Authentic completed image translation screenshot; `public/media/ocr-preview.webp` |
-| Operation tutorials | Real recordings transcoded into controlled MP4 with same-name WebP posters, originals retained |
-| Plugin examples | Text monograms as labels, no invented provider logos; links to real repository entries |
+| Ingredient                         | Medium and commitment                                                                                                  |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Header, headline, download, search | Semantic HTML, authored SVG icons, CSS; text stays live                                                                |
+| English reading scene              | Semantic article; demo copy explicitly labeled; purple selection is static, actual text can be selected                |
+| Floating translation window        | Authentic crop from repository recording, `public/media/hero-translation.webp`; no fabricated UI                       |
+| OCR feature                        | Authentic completed image translation screenshot; `public/media/ocr-preview.webp`                                      |
+| Operation tutorials                | Real recordings transcoded into controlled MP4 with same-name WebP posters; original GIFs recoverable from Git history |
+| Plugin examples                    | Text monograms as labels, no invented provider logos; links to real repository entries                                 |
 
 Shape: 9px action corners, 14px cards, 18px large stages. One-pixel neutral separators; genuine floating software receives soft offset shadow, otherwise flat surfaces. Homepage h1 72px desktop / 40px phone; document h1 32px / 27px; body 14–15px. Readable content appears immediately; no entrance choreography or automatic video. Media provenance is in `.impeccable/media-manifest.md`.
 

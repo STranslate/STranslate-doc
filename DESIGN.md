@@ -230,7 +230,7 @@ Plugin cards use the card radius, one-pixel neutral border and frontmatter inset
 
 ### Reading Scene and Media
 
-Live semantic sample text and a static selected phrase explain the interaction; the scene is explicitly labeled as a demonstration. The adjacent software window is the authentic `public/media/hero-translation.webp` crop, not recreated UI. OCR uses `public/media/ocr-preview.webp`. Retain intrinsic dimensions, meaningful alternative text and captions. Document recordings use controlled MP4 with `preload="none"`, `playsinline` and WebP posters; originals remain archived in `assets/recordings/` and are excluded from deployment. Media provenance lives in `.impeccable/media-manifest.md`.
+Live semantic sample text and a static selected phrase explain the interaction; the scene is explicitly labeled as a demonstration. The adjacent software window is the authentic `public/media/hero-translation.webp` crop, not recreated UI. OCR uses `public/media/ocr-preview.webp`. Retain intrinsic dimensions, meaningful alternative text and captions. Document recordings use controlled MP4 with `preload="none"`, `playsinline` and WebP posters. Redundant original GIFs have been removed from the working tree and can be recovered from Git history. Media provenance lives in `.impeccable/media-manifest.md`.
 
 ## Do's and Don'ts
 

@@ -13,7 +13,7 @@ async function htmlFiles(directory) {
   return files;
 }
 const failures = new Set();
-// Originals stay in assets/recordings; published files must fit Cloudflare Pages.
+// Published files must fit Cloudflare Pages.
 async function checkAssetSizes(directory) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const file = path.join(directory, entry.name);
