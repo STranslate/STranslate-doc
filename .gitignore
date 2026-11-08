@@ -37,6 +37,11 @@ thumbs.db
 .CVS  
 .idea  
 node_modules/  
+.astro/
+test-results/
+playwright-report/
+.impeccable/mocks/
+.impeccable/screenshots/
 jscoverage_lib/  
 bower_components/  
 dist/

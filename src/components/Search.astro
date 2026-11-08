@@ -1,0 +1,144 @@
+---
+import Icon from './Icon.astro';
+---
+
+<dialog
+  id="search-dialog"
+  class="search-dialog"
+  aria-labelledby="search-title"
+  data-pagefind-ignore
+>
+  <div class="search-heading">
+    <h2 id="search-title">搜索使用文档</h2>
+    <button class="icon-button" data-close-search aria-label="关闭搜索">
+      <Icon name="close" />
+    </button>
+  </div>
+  <label class="search-field">
+    <Icon name="search" />
+    <input
+      id="doc-search"
+      type="search"
+      aria-label="搜索使用文档"
+      placeholder="搜索翻译、OCR、插件…"
+      autocomplete="off"
+    />
+    <kbd aria-hidden="true">Esc</kbd>
+  </label>
+  <p id="search-status" role="status">
+    输入关键词，找到需要的使用方法。
+  </p>
+  <div id="search-results" class="search-results" aria-label="搜索结果"></div>
+  <div class="search-footer">
+    <span>
+      <kbd>↑</kbd> <kbd>↓</kbd> 选择
+    </span>
+    <span>
+      <kbd>Enter</kbd> 打开
+    </span>
+    <span>本地全文搜索</span>
+  </div>
+</dialog>
+<script>
+  interface SearchData {
+    url: string;
+    meta: { title?: string };
+    excerpt: string;
+  }
+  interface SearchHit {
+    data(): Promise<SearchData>;
+  }
+  interface SearchIndex {
+    search(query: string): Promise<{ results: SearchHit[] }>;
+  }
+  const dialog = document.querySelector<HTMLDialogElement>('#search-dialog')!;
+  const input = document.querySelector<HTMLInputElement>('#doc-search')!;
+  const status = document.querySelector<HTMLElement>('#search-status')!;
+  const results = document.querySelector<HTMLElement>('#search-results')!;
+  let index: Promise<SearchIndex> | undefined;
+  let sequence = 0;
+  let timer: ReturnType<typeof setTimeout>;
+  let opener: HTMLElement | null = null;
+  const open = () => {
+    opener = document.activeElement as HTMLElement;
+    dialog.showModal();
+    input.focus();
+  };
+  const close = () => dialog.close();
+  document
+    .querySelectorAll('[data-open-search]')
+    .forEach((button) => button.addEventListener('click', open));
+  dialog.querySelector('[data-close-search]')?.addEventListener('click', close);
+  dialog.addEventListener('click', (e) => {
+    if (
+      e.target === dialog &&
+      (e.clientX < dialog.getBoundingClientRect().left ||
+        e.clientX > dialog.getBoundingClientRect().right ||
+        e.clientY < dialog.getBoundingClientRect().top ||
+        e.clientY > dialog.getBoundingClientRect().bottom)
+    )
+      close();
+  });
+  dialog.addEventListener('close', () => opener?.focus());
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      if (!dialog.open) open();
+      else close();
+    }
+  });
+  input.addEventListener('input', () => {
+    clearTimeout(timer);
+    const request = ++sequence;
+    const query = input.value.trim();
+    results.replaceChildren();
+    if (!query) {
+      status.textContent = '输入关键词，找到需要的使用方法。';
+      return;
+    }
+    status.textContent = '正在查找…';
+    timer = setTimeout(async () => {
+      try {
+        const source = '/pagefind/pagefind.js';
+        index ??= import(/* @vite-ignore */ source) as Promise<SearchIndex>;
+        const response = await (await index).search(query);
+        const entries = await Promise.all(response.results.slice(0, 12).map((item) => item.data()));
+        if (request !== sequence) return;
+        status.textContent = entries.length
+          ? `找到 ${response.results.length} 条相关内容`
+          : '没有找到相关内容，试试更短的关键词。';
+        results.replaceChildren(
+          ...entries.map((entry) => {
+            const link = document.createElement('a');
+            link.href = entry.url;
+            const title = document.createElement('strong');
+            title.textContent = entry.meta.title || '使用文档';
+            const excerpt = document.createElement('p');
+            excerpt.textContent = entry.excerpt.replace(/<[^>]*>/g, '');
+            link.append(title, excerpt);
+            return link;
+          }),
+        );
+      } catch {
+        index = undefined;
+        if (request === sequence) status.textContent = '搜索暂时不可用，请重试，或从文档导航查找。';
+      }
+    }, 180);
+  });
+  dialog.addEventListener('keydown', (e) => {
+    const items = [...results.querySelectorAll<HTMLAnchorElement>('a')];
+    const position = items.indexOf(document.activeElement as HTMLAnchorElement);
+    if (e.key === 'ArrowDown' && items.length) {
+      e.preventDefault();
+      items[(position + 1) % items.length].focus();
+    }
+    if (e.key === 'ArrowUp' && items.length) {
+      e.preventDefault();
+      items[(position - 1 + items.length) % items.length].focus();
+    }
+    if (e.key === 'Enter' && document.activeElement === input && items.length) {
+      e.preventDefault();
+      items[0].click();
+    }
+  });
+</script>

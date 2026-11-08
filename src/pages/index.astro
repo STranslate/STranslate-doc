@@ -1,0 +1,258 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import repos from '../data/plugins.json';
+---
+
+<Base>
+  <main id="main-content">
+    <section class="home-hero wrap">
+      <h1>
+        选中，<span>即刻读懂。</span>
+      </h1>
+      <p class="hero-description">
+        翻译、识别、朗读，随手之间。
+        <br class="mobile-break" />
+        让语言不再打断你的思路。
+      </p>
+      <div class="hero-actions">
+        <a
+          class="button primary"
+          href="https://github.com/STranslate/STranslate/releases"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Icon name="download" />
+          下载 STranslate
+          <Icon name="arrow" size={16} />
+        </a>
+        <a class="button secondary" href="/docs/getting-started/">
+          快速开始
+          <Icon name="right" size={18} />
+        </a>
+      </div>
+      <p class="platform-note">
+        <Icon name="windows" size={14} /> 为 Windows 而生 <span aria-hidden="true">·</span>{' '}
+        即用即走的翻译与 OCR 工具
+      </p>
+      <div class="reading-stage">
+        <div class="scene-caption">
+          <span class="live-dot" aria-hidden="true"></span>
+          <span>从一段文字，打开另一个世界。</span>
+          <span class="demo-label">演示场景</span>
+        </div>
+        <div class="reading-browser">
+          <div class="browser-toolbar">
+            <div class="window-dots" aria-hidden="true">
+              <i></i>
+              <i></i>
+              <i></i>
+            </div>
+            <span>
+              <Icon name="book" size={14} /> A moment of understanding
+            </span>
+            <Icon name="close" size={13} />
+          </div>
+          <div class="article-scene">
+            <article class="sample-article" lang="en" aria-label="英文阅读演示">
+              <div class="article-byline">
+                A NOTE ON CURIOSITY <span>3 min read</span>
+              </div>
+              <h2>
+                A little curiosity.
+                <br />{' '}A whole new world.
+              </h2>
+              <p>
+                Every new beginning starts with a simple <mark>hello world</mark>. A small phrase, a
+                new language, a different way to see.
+              </p>
+              <p>
+                You don't need to understand everything at once. Just follow the words that make you
+                curious, and let the meaning find you.
+              </p>
+              <p class="article-fade">
+                Keep reading. Keep wondering. There is always something worth understanding.
+              </p>
+            </article>
+            <figure class="floating-product">
+              <img
+                src="/media/hero-translation.webp"
+                alt="STranslate 实际窗口：hello world 的中文翻译及多源结果"
+                width="824"
+                height="676"
+                fetchpriority="high"
+              />
+              <figcaption>
+                <span class="selection-line" aria-hidden="true"></span>
+                <span>真实软件界面 · 多源翻译</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="scene-foot">
+          <span>
+            <Icon name="translate" size={16} /> 划词，即刻翻译
+          </span>
+          <span>
+            <Icon name="scan" size={16} /> 截图，也能读懂
+          </span>
+          <span>
+            <Icon name="puzzle" size={16} /> 服务，自由扩展
+          </span>
+          <a href="/docs/translation/">
+            了解使用方式 <Icon name="right" size={15} />
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="workflow-section wrap" aria-labelledby="workflow-title">
+      <div class="section-intro">
+        <h2 id="workflow-title">
+          思路继续，
+          <br />
+          翻译随行。
+        </h2>
+        <p>
+          从一段文字到一张图片，
+          <br />
+          用顺手的方式，把内容读明白。
+        </p>
+      </div>
+      <div class="workflow-links">
+        <a href="/docs/translation/">
+          <Icon name="translate" size={25} />
+          <div>
+            <h3>一段文字，多种理解</h3>
+            <p>划词与增量翻译，多源结果并排对照。</p>
+          </div>
+          <Icon name="arrow" />
+        </a>
+        <a href="/docs/preferences/">
+          <Icon name="headphones" size={25} />
+          <div>
+            <h3>不止翻译，也可以听见</h3>
+            <p>语音朗读、生词收藏，延续你的学习节奏。</p>
+          </div>
+          <Icon name="arrow" />
+        </a>
+        <a href="/docs/invoke/">
+          <Icon name="code" size={25} />
+          <div>
+            <h3>接入你熟悉的工作流</h3>
+            <p>通过全局热键与本地接口，连接日常工具。</p>
+          </div>
+          <Icon name="arrow" />
+        </a>
+      </div>
+    </section>
+    <section class="ocr-section">
+      <div class="wrap ocr-inner">
+        <div class="ocr-copy">
+          <Icon name="scan" size={32} />
+          <h2>
+            选不了的文字，
+            <br />
+            也能看得明白。
+          </h2>
+          <p>
+            截图识别，图片翻译。把屏幕上的文字提取出来，或直接在原图位置阅读译文。内置微信
+            OCR，识别也可以离线完成。
+          </p>
+          <a class="text-link" href="/docs/ocr/">
+            探索图片翻译与 OCR <Icon name="right" size={18} />
+          </a>
+        </div>
+        <figure class="ocr-visual">
+          <img
+            src="/media/ocr-preview.webp"
+            alt="STranslate 实际图片翻译演示：在原图位置显示中文译文"
+            width="1280"
+            height="572"
+            loading="lazy"
+          />
+          <figcaption>图片翻译 · 软件实际操作画面</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section class="ecosystem-section wrap">
+      <div class="ecosystem-heading">
+        <div>
+          <h2>
+            你的工具，
+            <br />
+            由你扩展。
+          </h2>
+          <p>
+            选择熟悉的服务，也发现新的可能。
+            <br />
+            官方与社区插件，让 STranslate 更合你的习惯。
+          </p>
+        </div>
+        <a class="button secondary" href="/plugins/">
+          探索插件市场
+          <Icon name="right" size={18} />
+        </a>
+      </div>
+      <div class="plugin-ribbon" aria-label="插件生态示例">
+        <a href="/plugins/?q=DeepL">
+          <span class="service-monogram deep">D</span>
+          <span>
+            DeepL<span>翻译服务</span>
+          </span>
+          <Icon name="arrow" size={18} />
+        </a>
+        <a href="/plugins/?q=Gemini">
+          <span class="service-monogram gemini">G</span>
+          <span>
+            Gemini<span>翻译 / OCR</span>
+          </span>
+          <Icon name="arrow" size={18} />
+        </a>
+        <a href="/plugins/?q=Ollama">
+          <span class="service-monogram ollama">O</span>
+          <span>
+            Ollama<span>本地模型</span>
+          </span>
+          <Icon name="arrow" size={18} />
+        </a>
+        <a href="/plugins/">
+          <span class="service-monogram more">
+            <Icon name="puzzle" size={27} />
+          </span>
+          <span>
+            还有更多<span>{repos.length} 个已收录仓库</span>
+          </span>
+          <Icon name="right" size={18} />
+        </a>
+      </div>
+      <p class="ecosystem-note">
+        翻译 / OCR / TTS / 生词本 <span>·</span> 按需安装，灵活组合
+      </p>
+    </section>
+    <section class="start-section wrap">
+      <div>
+        <h2>
+          下一次遇到不懂的，
+          <br />
+          就交给 STranslate。
+        </h2>
+        <p>从第一次翻译开始，让理解成为习惯。</p>
+      </div>
+      <div class="start-actions">
+        <a
+          class="button primary"
+          href="https://github.com/STranslate/STranslate/releases"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Icon name="download" />
+          下载 STranslate
+        </a>
+        <a href="/docs/getting-started/" class="text-link">
+          先看看使用文档
+          <Icon name="right" size={17} />
+        </a>
+      </div>
+    </section>
+  </main>
+</Base>

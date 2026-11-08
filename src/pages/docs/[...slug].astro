@@ -1,0 +1,26 @@
+---
+import { render } from 'astro:content';
+import { orderedDocs } from '../../lib/docs';
+import Docs from '../../layouts/Docs.astro';
+export async function getStaticPaths() {
+  const docs = await orderedDocs();
+  return docs.map((doc, index) => ({
+    params: { slug: doc.id },
+    props: { doc, previous: docs[index - 1], next: docs[index + 1] },
+  }));
+}
+const { doc, previous, next } = Astro.props;
+const { Content, headings } = await render(doc);
+---
+
+<Docs
+  title={doc.data.title}
+  description={doc.data.description}
+  group={doc.data.group}
+  headings={headings}
+  editPath={`src/content/docs/${doc.id}.md`}
+  previous={previous && { id: previous.id, title: previous.data.title }}
+  next={next && { id: next.id, title: next.data.title }}
+>
+  <Content />
+</Docs>

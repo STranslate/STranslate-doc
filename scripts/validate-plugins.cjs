@@ -10,7 +10,8 @@ const execFileAsync = promisify(execFile);
 const DEFAULT_ORG = 'STranslate';
 const MARKET_BRANCHES = ['main', 'master'];
 const REQUEST_TIMEOUT_MS = 15000;
-const PLUGINS_JSON_PATH = 'vitepress/plugins.json';
+const PLUGINS_JSON_PATH = 'src/data/plugins.json';
+const LEGACY_PLUGINS_JSON_PATH = 'vitepress/plugins.json';
 const BUILTIN_PLUGINS_API_URL =
   'https://api.github.com/repos/STranslate/STranslate/contents/src/Plugins?ref=main';
 const BUILTIN_PLUGINS_RAW_BASE =
@@ -28,17 +29,16 @@ async function main() {
     printWarning(warning);
   }
 
-  const { addedEntries, existingEntries } = splitAddedEntries(
-    currentEntries,
-    baseState.entries,
-  );
+  const { addedEntries, existingEntries } = splitAddedEntries(currentEntries, baseState.entries);
 
   if (addedEntries.length === 0) {
     console.log('No newly added plugin entries found. Skipping PluginID conflict checks.');
     return;
   }
 
-  console.log(`Found ${addedEntries.length} newly added plugin entr${addedEntries.length === 1 ? 'y' : 'ies'}.`);
+  console.log(
+    `Found ${addedEntries.length} newly added plugin entr${addedEntries.length === 1 ? 'y' : 'ies'}.`,
+  );
 
   const [addedResults, existingResults, builtinState] = await Promise.all([
     Promise.all(addedEntries.map((entry) => fetchMarketPluginInfo(entry, 'added-market'))),
@@ -51,13 +51,12 @@ async function main() {
     ...builtinState.warnings,
   ];
   const failures = addedResults.filter((result) => result.error);
-  const comparableResults = [
-    ...addedResults,
-    ...existingResults,
-    ...builtinState.results,
-  ].filter((result) => result.pluginId);
-  const duplicates = findDuplicatePluginIds(comparableResults)
-    .filter((duplicate) => duplicate.matches.some((match) => match.source === 'added-market'));
+  const comparableResults = [...addedResults, ...existingResults, ...builtinState.results].filter(
+    (result) => result.pluginId,
+  );
+  const duplicates = findDuplicatePluginIds(comparableResults).filter((duplicate) =>
+    duplicate.matches.some((match) => match.source === 'added-market'),
+  );
 
   for (const warning of warnings) {
     printWarning(warning);
@@ -100,7 +99,9 @@ async function readBasePluginEntries() {
     } catch (error) {
       return {
         entries: [],
-        warnings: [`Failed to read BASE_PLUGINS_FILE (${baseFile}); treating all current entries as added. ${error.message}`],
+        warnings: [
+          `Failed to read BASE_PLUGINS_FILE (${baseFile}); treating all current entries as added. ${error.message}`,
+        ],
       };
     }
   }
@@ -121,27 +122,27 @@ async function readBasePluginEntries() {
     };
   }
 
-  try {
-    const { stdout } = await execFileAsync(
-      'git',
-      ['show', `${baseRef}:${PLUGINS_JSON_PATH}`],
-      {
+  for (const registryPath of [PLUGINS_JSON_PATH, LEGACY_PLUGINS_JSON_PATH]) {
+    try {
+      const { stdout } = await execFileAsync('git', ['show', `${baseRef}:${registryPath}`], {
         cwd: process.cwd(),
         encoding: 'utf8',
         maxBuffer: 1024 * 1024,
-      },
-    );
-
-    return {
-      entries: parsePluginEntries(stdout, `${baseRef}:${PLUGINS_JSON_PATH}`, { allowEmpty: true }),
-      warnings: [],
-    };
-  } catch (error) {
-    return {
-      entries: [],
-      warnings: [`Failed to read ${PLUGINS_JSON_PATH} from BASE_PLUGINS_REF (${baseRef}); treating all current entries as added. ${error.message}`],
-    };
+      });
+      return {
+        entries: parsePluginEntries(stdout, `${baseRef}:${registryPath}`, { allowEmpty: true }),
+        warnings: [],
+      };
+    } catch {
+      /* Baselines before the Astro migration use the legacy path. */
+    }
   }
+  return {
+    entries: [],
+    warnings: [
+      `Failed to read the plugin registry from BASE_PLUGINS_REF (${baseRef}); treating all current entries as added.`,
+    ],
+  };
 }
 
 function parsePluginEntries(raw, label, options = {}) {
@@ -265,7 +266,9 @@ async function fetchBuiltinPluginInfos() {
     if (!response.ok) {
       return {
         results: [],
-        warnings: [`Failed to list builtin plugins: HTTP ${response.status} ${response.statusText}`],
+        warnings: [
+          `Failed to list builtin plugins: HTTP ${response.status} ${response.statusText}`,
+        ],
       };
     }
 
@@ -283,7 +286,9 @@ async function fetchBuiltinPluginInfos() {
   } catch (error) {
     return {
       results: [],
-      warnings: [`Failed to load builtin plugins; skipping builtin PluginID comparison. ${error.message}`],
+      warnings: [
+        `Failed to load builtin plugins; skipping builtin PluginID comparison. ${error.message}`,
+      ],
     };
   }
 }

@@ -1,0 +1,100 @@
+---
+import Icon from './Icon.astro';
+const path = Astro.url.pathname;
+const links = [
+  { href: '/', label: '首页' },
+  { href: '/docs/', label: '使用文档' },
+  { href: '/plugins/', label: '插件市场' },
+];
+---
+
+<header class="site-header" data-pagefind-ignore>
+  <div class="header-inner">
+    <a href="/" class="brand" aria-label="STranslate 首页">
+      <img src="/logo/logo.svg" alt="" width="30" height="30" />
+      <span>STranslate</span>
+    </a>
+    <nav class="desktop-nav" aria-label="主导航">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          aria-current={
+            (link.href === '/' ? path === '/' : path.startsWith(link.href)) ? 'page' : undefined
+          }
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+    <div class="header-tools">
+      <button class="search-trigger" data-open-search aria-label="搜索文档">
+        <Icon name="search" size={17} />
+        <span>搜索文档</span>
+        <kbd>Ctrl K</kbd>
+      </button>
+      <a
+        class="icon-button github-header"
+        href="https://github.com/STranslate/STranslate"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="GitHub 仓库"
+      >
+        <Icon name="github" />
+      </a>
+      <button class="icon-button theme-toggle" aria-label="切换深浅主题" title="切换深浅主题">
+        <Icon name="sun" class="sun-icon" />
+        <Icon name="moon" class="moon-icon" />
+      </button>
+      <button
+        class="icon-button mobile-menu-toggle"
+        aria-label="打开主导航"
+        aria-expanded="false"
+        aria-controls="mobile-navigation"
+      >
+        <Icon name="menu" />
+      </button>
+    </div>
+  </div>
+  <nav id="mobile-navigation" class="mobile-navigation" aria-label="移动主导航" hidden>
+    {links.map((link) => (
+      <a
+        href={link.href}
+        aria-current={
+          (link.href === '/' ? path === '/' : path.startsWith(link.href)) ? 'page' : undefined
+        }
+      >
+        {link.label}
+        <Icon name="right" size={16} />
+      </a>
+    ))}
+    <a href="https://github.com/STranslate/STranslate" target="_blank" rel="noreferrer">
+      GitHub
+      <Icon name="arrow" size={16} />
+    </a>
+  </nav>
+</header>
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.mobile-menu-toggle');
+  const menu = document.querySelector<HTMLElement>('#mobile-navigation');
+  toggle?.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(expanded));
+    toggle.setAttribute('aria-label', expanded ? '关闭主导航' : '打开主导航');
+    if (menu) menu.hidden = !expanded;
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu && toggle) {
+      menu.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.querySelector('.theme-toggle')?.addEventListener('click', () => {
+    const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = theme;
+    try {
+      localStorage.setItem('stranslate-theme', theme);
+    } catch {
+      /* Preferences are optional. */
+    }
+  });
+</script>

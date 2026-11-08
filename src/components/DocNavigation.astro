@@ -1,0 +1,37 @@
+---
+import { groups, orderedDocs } from '../lib/docs';
+import Icon from './Icon.astro';
+const docs = await orderedDocs();
+const path = Astro.url.pathname;
+---
+
+<nav class="docs-navigation" aria-label="文档导航" data-pagefind-ignore>
+  <a class="docs-overview" href="/docs/" aria-current={path === '/docs/' ? 'page' : undefined}>
+    <Icon name="book" size={18} />
+    文档概览
+  </a>
+  {groups.map((group) => (
+    <div class="nav-group">
+      <h2>{group}</h2>
+      {docs
+        .filter((doc) => doc.data.group === group)
+        .map((doc) => (
+          <a
+            href={`/docs/${doc.id}/`}
+            aria-current={path === `/docs/${doc.id}/` ? 'page' : undefined}
+          >
+            {doc.data.title}
+          </a>
+        ))}
+    </div>
+  ))}
+  <a
+    class="developer-link"
+    href="https://github.com/STranslate/STranslate/blob/main/src/docs/community-plugin-development.md"
+    target="_blank"
+    rel="noreferrer"
+  >
+    插件开发指南
+    <Icon name="arrow" size={15} />
+  </a>
+</nav>

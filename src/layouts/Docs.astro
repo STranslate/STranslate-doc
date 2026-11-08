@@ -1,0 +1,202 @@
+---
+import Base from './Base.astro';
+import DocNavigation from '../components/DocNavigation.astro';
+import Icon from '../components/Icon.astro';
+import type { MarkdownHeading } from 'astro';
+interface Props {
+  title: string;
+  description: string;
+  headings?: MarkdownHeading[];
+  editPath?: string;
+  previous?: { id: string; title: string };
+  next?: { id: string; title: string };
+  group?: string;
+}
+const { title, description, headings = [], editPath, previous, next, group } = Astro.props;
+const outline = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+---
+
+<Base title={title} description={description}>
+  <div class="docs-mobile-bar" data-pagefind-ignore>
+    <button data-toggle-docs aria-expanded="false" aria-controls="docs-sidebar">
+      <Icon name="menu" size={17} />
+      文档导航
+    </button>
+    {outline.length > 0 && (
+      <details>
+        <summary>
+          本页目录
+          <Icon name="down" size={15} />
+        </summary>
+        <nav aria-label="移动本页目录">
+          {outline.map((heading) => (
+            <a href={`#${heading.slug}`}>{heading.text}</a>
+          ))}
+        </nav>
+      </details>
+    )}
+  </div>
+  <div class="docs-shell wrap">
+    <aside id="docs-sidebar" class="docs-sidebar">
+      <DocNavigation />
+    </aside>
+    <main id="main-content" class="docs-main">
+      <div class="breadcrumbs" data-pagefind-ignore>
+        <a href="/docs/">使用文档</a>
+        <Icon name="chevron" size={13} />
+        <span>{group || '概览'}</span>
+      </div>
+      <article class="doc-article" data-pagefind-body>
+        <header class="doc-heading">
+          <h1 data-pagefind-meta="title">{title}</h1>
+          <p>{description}</p>
+        </header>
+        <div class="prose">
+          <slot />
+        </div>
+      </article>
+      {editPath && (
+        <div class="doc-feedback" data-pagefind-ignore>
+          <a href={`https://github.com/STranslate/STranslate-doc/edit/main/${editPath}`}>
+            在 GitHub 上编辑此页面
+            <Icon name="arrow" size={15} />
+          </a>
+          <a
+            href="https://github.com/STranslate/STranslate/issues"
+            target="_blank"
+            rel="noreferrer"
+          >
+            遇到问题？提交反馈
+            <Icon name="arrow" size={15} />
+          </a>
+        </div>
+      )}
+      {(previous || next) && (
+        <nav class="doc-pagination" aria-label="文档翻页" data-pagefind-ignore>
+          {previous ? (
+            <a href={`/docs/${previous.id}/`}>
+              <span>上一篇</span>
+              <strong>{previous.title}</strong>
+            </a>
+          ) : (
+            <div></div>
+          )}
+          {next && (
+            <a href={`/docs/${next.id}/`}>
+              <span>下一篇</span>
+              <strong>
+                {next.title}
+                <Icon name="right" size={17} />
+              </strong>
+            </a>
+          )}
+        </nav>
+      )}
+    </main>
+    <aside class="docs-outline" data-pagefind-ignore>
+      {outline.length > 0 && (
+        <nav aria-label="本页目录">
+          <h2>本页内容</h2>
+          {outline.map((heading) => (
+            <a href={`#${heading.slug}`} class:list={{ 'outline-sub': heading.depth === 3 }}>
+              {heading.text}
+            </a>
+          ))}
+        </nav>
+      )}
+      <a class="outline-help" href="/docs/support/">
+        <Icon name="heart" size={16} />
+        反馈与支持
+      </a>
+    </aside>
+  </div>
+  <dialog class="image-dialog" aria-label="放大查看图片" data-pagefind-ignore>
+    <button class="icon-button" aria-label="关闭图片">
+      <Icon name="close" />
+    </button>
+  </dialog>
+  <script>
+    const sidebar = document.querySelector('#docs-sidebar');
+    const toggle = document.querySelector('[data-toggle-docs]');
+    toggle?.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') !== 'true';
+      toggle.setAttribute('aria-expanded', String(expanded));
+      sidebar?.classList.toggle('is-open', expanded);
+    });
+    document
+      .querySelectorAll('.docs-mobile-bar details a')
+      .forEach((link) =>
+        link.addEventListener('click', () =>
+          document.querySelector('.docs-mobile-bar details')?.removeAttribute('open'),
+        ),
+      );
+    document.querySelectorAll('.prose pre').forEach((pre) => {
+      const button = document.createElement('button');
+      button.className = 'copy-code';
+      button.textContent = '复制';
+      button.setAttribute('aria-label', '复制代码');
+      button.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(pre.querySelector('code')?.textContent || '');
+          button.textContent = '已复制';
+        } catch {
+          button.textContent = '复制失败，请手动选择';
+        }
+        setTimeout(() => {
+          button.textContent = '复制';
+        }, 2000);
+      });
+      pre.append(button);
+    });
+    const imageDialog = document.querySelector<HTMLDialogElement>('.image-dialog');
+    let imageOpener: HTMLElement | null = null;
+    document.querySelectorAll<HTMLImageElement>('.prose img').forEach((img) => {
+      const button = document.createElement('button');
+      button.className = 'image-zoom';
+      button.setAttribute('aria-label', `放大查看：${img.alt}`);
+      img.replaceWith(button);
+      button.append(img);
+      button.addEventListener('click', () => {
+        if (!imageDialog) return;
+        const target = imageDialog.querySelector('img') || document.createElement('img');
+        imageOpener = button;
+        target.src = img.src;
+        target.alt = img.alt;
+        if (!target.parentNode) imageDialog.append(target);
+        imageDialog.showModal();
+      });
+    });
+    imageDialog?.querySelector('button')?.addEventListener('click', () => imageDialog.close());
+    imageDialog?.addEventListener('click', (e) => {
+      if (e.target === imageDialog) imageDialog.close();
+    });
+    imageDialog?.addEventListener('close', () => imageOpener?.focus());
+    const activeLinks = document.querySelectorAll<HTMLAnchorElement>('.docs-outline a[href^="#"]');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries)
+            if (entry.isIntersecting) {
+              activeLinks.forEach((link) =>
+                link.classList.toggle(
+                  'is-current',
+                  decodeURIComponent(link.hash.slice(1)) === entry.target.id,
+                ),
+              );
+            }
+        },
+        { rootMargin: '-90px 0px -65% 0px' },
+      );
+      document
+        .querySelectorAll('.prose h2, .prose h3')
+        .forEach((heading) => observer.observe(heading));
+    }
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    document.querySelectorAll<HTMLVideoElement>('.prose video').forEach((video) => {
+      if (reduced.matches) {
+        video.removeAttribute('autoplay');
+        video.pause();
+      }
+    });
+  </script>
+</Base>

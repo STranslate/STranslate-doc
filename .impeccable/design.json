@@ -1,0 +1,587 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-08T13:10:21.663Z",
+  "title": "Design System: STranslate",
+  "extensions": {
+    "colorMeta": {
+      "bg": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "oklch(15% 0.00000 0.00)",
+          "oklch(26.43% 0.00000 0.00)",
+          "oklch(37.86% 0.00000 0.00)",
+          "oklch(49.29% 0.00000 0.00)",
+          "oklch(60.71% 0.00000 0.00)",
+          "oklch(72.14% 0.00000 0.00)",
+          "oklch(83.57% 0.00000 0.00)",
+          "oklch(95% 0.00000 0.00)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Quiet Surface",
+        "tonalRamp": [
+          "oklch(15% 0.00413 271.37)",
+          "oklch(26.43% 0.00413 271.37)",
+          "oklch(37.86% 0.00413 271.37)",
+          "oklch(49.29% 0.00413 271.37)",
+          "oklch(60.71% 0.00413 271.37)",
+          "oklch(72.14% 0.00413 271.37)",
+          "oklch(83.57% 0.00413 271.37)",
+          "oklch(95% 0.00413 271.37)"
+        ]
+      },
+      "surface-2": {
+        "role": "neutral",
+        "displayName": "Inset Surface",
+        "tonalRamp": [
+          "oklch(15% 0.00703 268.55)",
+          "oklch(26.43% 0.00703 268.55)",
+          "oklch(37.86% 0.00703 268.55)",
+          "oklch(49.29% 0.00703 268.55)",
+          "oklch(60.71% 0.00703 268.55)",
+          "oklch(72.14% 0.00703 268.55)",
+          "oklch(83.57% 0.00703 268.55)",
+          "oklch(95% 0.00703 268.55)"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Reading Ink",
+        "tonalRamp": [
+          "oklch(15% 0.02069 276.84)",
+          "oklch(26.43% 0.02069 276.84)",
+          "oklch(37.86% 0.02069 276.84)",
+          "oklch(49.29% 0.02069 276.84)",
+          "oklch(60.71% 0.02069 276.84)",
+          "oklch(72.14% 0.02069 276.84)",
+          "oklch(83.57% 0.02069 276.84)",
+          "oklch(95% 0.02069 276.84)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Supporting Ink",
+        "tonalRamp": [
+          "oklch(15% 0.02265 272.93)",
+          "oklch(26.43% 0.02265 272.93)",
+          "oklch(37.86% 0.02265 272.93)",
+          "oklch(49.29% 0.02265 272.93)",
+          "oklch(60.71% 0.02265 272.93)",
+          "oklch(72.14% 0.02265 272.93)",
+          "oklch(83.57% 0.02265 272.93)",
+          "oklch(95% 0.02265 272.93)"
+        ]
+      },
+      "subtle": {
+        "role": "neutral",
+        "displayName": "Quiet Ink",
+        "tonalRamp": [
+          "oklch(15% 0.02391 270.97)",
+          "oklch(26.43% 0.02391 270.97)",
+          "oklch(37.86% 0.02391 270.97)",
+          "oklch(49.29% 0.02391 270.97)",
+          "oklch(60.71% 0.02391 270.97)",
+          "oklch(72.14% 0.02391 270.97)",
+          "oklch(83.57% 0.02391 270.97)",
+          "oklch(95% 0.02391 270.97)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "tonalRamp": [
+          "oklch(15% 0.00814 278.63)",
+          "oklch(26.43% 0.00814 278.63)",
+          "oklch(37.86% 0.00814 278.63)",
+          "oklch(49.29% 0.00814 278.63)",
+          "oklch(60.71% 0.00814 278.63)",
+          "oklch(72.14% 0.00814 278.63)",
+          "oklch(83.57% 0.00814 278.63)",
+          "oklch(95% 0.00814 278.63)"
+        ]
+      },
+      "brand": {
+        "role": "primary",
+        "displayName": "Selection Violet",
+        "tonalRamp": [
+          "oklch(15% 0.13352 304.68)",
+          "oklch(26.43% 0.13352 304.68)",
+          "oklch(37.86% 0.13352 304.68)",
+          "oklch(49.29% 0.13352 304.68)",
+          "oklch(60.71% 0.13352 304.68)",
+          "oklch(72.14% 0.13352 304.68)",
+          "oklch(83.57% 0.13352 304.68)",
+          "oklch(95% 0.13352 304.68)"
+        ]
+      },
+      "brand-hover": {
+        "role": "primary",
+        "displayName": "Violet Hover",
+        "tonalRamp": [
+          "oklch(15% 0.13127 305.88)",
+          "oklch(26.43% 0.13127 305.88)",
+          "oklch(37.86% 0.13127 305.88)",
+          "oklch(49.29% 0.13127 305.88)",
+          "oklch(60.71% 0.13127 305.88)",
+          "oklch(72.14% 0.13127 305.88)",
+          "oklch(83.57% 0.13127 305.88)",
+          "oklch(95% 0.13127 305.88)"
+        ]
+      },
+      "brand-soft": {
+        "role": "primary",
+        "displayName": "Violet Wash",
+        "tonalRamp": [
+          "oklch(15% 0.01969 305.26)",
+          "oklch(26.43% 0.01969 305.26)",
+          "oklch(37.86% 0.01969 305.26)",
+          "oklch(49.29% 0.01969 305.26)",
+          "oklch(60.71% 0.01969 305.26)",
+          "oklch(72.14% 0.01969 305.26)",
+          "oklch(83.57% 0.01969 305.26)",
+          "oklch(95% 0.01969 305.26)"
+        ]
+      },
+      "brand-text": {
+        "role": "primary",
+        "displayName": "Violet Ink",
+        "tonalRamp": [
+          "oklch(15% 0.14041 306.10)",
+          "oklch(26.43% 0.14041 306.10)",
+          "oklch(37.86% 0.14041 306.10)",
+          "oklch(49.29% 0.14041 306.10)",
+          "oklch(60.71% 0.14041 306.10)",
+          "oklch(72.14% 0.14041 306.10)",
+          "oklch(83.57% 0.14041 306.10)",
+          "oklch(95% 0.14041 306.10)"
+        ]
+      },
+      "stage": {
+        "role": "primary",
+        "displayName": "Reading Stage",
+        "tonalRamp": [
+          "oklch(15% 0.01237 301.28)",
+          "oklch(26.43% 0.01237 301.28)",
+          "oklch(37.86% 0.01237 301.28)",
+          "oklch(49.29% 0.01237 301.28)",
+          "oklch(60.71% 0.01237 301.28)",
+          "oklch(72.14% 0.01237 301.28)",
+          "oklch(83.57% 0.01237 301.28)",
+          "oklch(95% 0.01237 301.28)"
+        ]
+      },
+      "selection": {
+        "role": "primary",
+        "displayName": "Selected Text",
+        "tonalRamp": [
+          "oklch(15% 0.04351 307.92)",
+          "oklch(26.43% 0.04351 307.92)",
+          "oklch(37.86% 0.04351 307.92)",
+          "oklch(49.29% 0.04351 307.92)",
+          "oklch(60.71% 0.04351 307.92)",
+          "oklch(72.14% 0.04351 307.92)",
+          "oklch(83.57% 0.04351 307.92)",
+          "oklch(95% 0.04351 307.92)"
+        ]
+      },
+      "dark-bg": {
+        "role": "neutral",
+        "displayName": "Dark Paper",
+        "tonalRamp": [
+          "oklch(15% 0.01192 277.86)",
+          "oklch(26.43% 0.01192 277.86)",
+          "oklch(37.86% 0.01192 277.86)",
+          "oklch(49.29% 0.01192 277.86)",
+          "oklch(60.71% 0.01192 277.86)",
+          "oklch(72.14% 0.01192 277.86)",
+          "oklch(83.57% 0.01192 277.86)",
+          "oklch(95% 0.01192 277.86)"
+        ]
+      },
+      "dark-surface": {
+        "role": "neutral",
+        "displayName": "Dark Quiet Surface",
+        "tonalRamp": [
+          "oklch(15% 0.01551 274.17)",
+          "oklch(26.43% 0.01551 274.17)",
+          "oklch(37.86% 0.01551 274.17)",
+          "oklch(49.29% 0.01551 274.17)",
+          "oklch(60.71% 0.01551 274.17)",
+          "oklch(72.14% 0.01551 274.17)",
+          "oklch(83.57% 0.01551 274.17)",
+          "oklch(95% 0.01551 274.17)"
+        ]
+      },
+      "dark-surface-2": {
+        "role": "neutral",
+        "displayName": "Dark Inset Surface",
+        "tonalRamp": [
+          "oklch(15% 0.01883 272.04)",
+          "oklch(26.43% 0.01883 272.04)",
+          "oklch(37.86% 0.01883 272.04)",
+          "oklch(49.29% 0.01883 272.04)",
+          "oklch(60.71% 0.01883 272.04)",
+          "oklch(72.14% 0.01883 272.04)",
+          "oklch(83.57% 0.01883 272.04)",
+          "oklch(95% 0.01883 272.04)"
+        ]
+      },
+      "dark-text": {
+        "role": "neutral",
+        "displayName": "Dark Reading Ink",
+        "tonalRamp": [
+          "oklch(15% 0.00936 286.22)",
+          "oklch(26.43% 0.00936 286.22)",
+          "oklch(37.86% 0.00936 286.22)",
+          "oklch(49.29% 0.00936 286.22)",
+          "oklch(60.71% 0.00936 286.22)",
+          "oklch(72.14% 0.00936 286.22)",
+          "oklch(83.57% 0.00936 286.22)",
+          "oklch(95% 0.00936 286.22)"
+        ]
+      },
+      "dark-muted": {
+        "role": "neutral",
+        "displayName": "Dark Supporting Ink",
+        "tonalRamp": [
+          "oklch(15% 0.02320 277.36)",
+          "oklch(26.43% 0.02320 277.36)",
+          "oklch(37.86% 0.02320 277.36)",
+          "oklch(49.29% 0.02320 277.36)",
+          "oklch(60.71% 0.02320 277.36)",
+          "oklch(72.14% 0.02320 277.36)",
+          "oklch(83.57% 0.02320 277.36)",
+          "oklch(95% 0.02320 277.36)"
+        ]
+      },
+      "dark-subtle": {
+        "role": "neutral",
+        "displayName": "Dark Quiet Ink",
+        "tonalRamp": [
+          "oklch(15% 0.02705 273.33)",
+          "oklch(26.43% 0.02705 273.33)",
+          "oklch(37.86% 0.02705 273.33)",
+          "oklch(49.29% 0.02705 273.33)",
+          "oklch(60.71% 0.02705 273.33)",
+          "oklch(72.14% 0.02705 273.33)",
+          "oklch(83.57% 0.02705 273.33)",
+          "oklch(95% 0.02705 273.33)"
+        ]
+      },
+      "dark-line": {
+        "role": "neutral",
+        "displayName": "Dark Hairline",
+        "tonalRamp": [
+          "oklch(15% 0.02327 278.14)",
+          "oklch(26.43% 0.02327 278.14)",
+          "oklch(37.86% 0.02327 278.14)",
+          "oklch(49.29% 0.02327 278.14)",
+          "oklch(60.71% 0.02327 278.14)",
+          "oklch(72.14% 0.02327 278.14)",
+          "oklch(83.57% 0.02327 278.14)",
+          "oklch(95% 0.02327 278.14)"
+        ]
+      },
+      "dark-brand": {
+        "role": "primary",
+        "displayName": "Dark Selection Violet",
+        "tonalRamp": [
+          "oklch(15% 0.12374 308.45)",
+          "oklch(26.43% 0.12374 308.45)",
+          "oklch(37.86% 0.12374 308.45)",
+          "oklch(49.29% 0.12374 308.45)",
+          "oklch(60.71% 0.12374 308.45)",
+          "oklch(72.14% 0.12374 308.45)",
+          "oklch(83.57% 0.12374 308.45)",
+          "oklch(95% 0.12374 308.45)"
+        ]
+      },
+      "dark-brand-hover": {
+        "role": "primary",
+        "displayName": "Dark Violet Hover",
+        "tonalRamp": [
+          "oklch(15% 0.10586 309.46)",
+          "oklch(26.43% 0.10586 309.46)",
+          "oklch(37.86% 0.10586 309.46)",
+          "oklch(49.29% 0.10586 309.46)",
+          "oklch(60.71% 0.10586 309.46)",
+          "oklch(72.14% 0.10586 309.46)",
+          "oklch(83.57% 0.10586 309.46)",
+          "oklch(95% 0.10586 309.46)"
+        ]
+      },
+      "dark-brand-soft": {
+        "role": "primary",
+        "displayName": "Dark Violet Wash",
+        "tonalRamp": [
+          "oklch(15% 0.04841 302.95)",
+          "oklch(26.43% 0.04841 302.95)",
+          "oklch(37.86% 0.04841 302.95)",
+          "oklch(49.29% 0.04841 302.95)",
+          "oklch(60.71% 0.04841 302.95)",
+          "oklch(72.14% 0.04841 302.95)",
+          "oklch(83.57% 0.04841 302.95)",
+          "oklch(95% 0.04841 302.95)"
+        ]
+      },
+      "dark-brand-text": {
+        "role": "primary",
+        "displayName": "Dark Violet Ink",
+        "tonalRamp": [
+          "oklch(15% 0.11232 309.21)",
+          "oklch(26.43% 0.11232 309.21)",
+          "oklch(37.86% 0.11232 309.21)",
+          "oklch(49.29% 0.11232 309.21)",
+          "oklch(60.71% 0.11232 309.21)",
+          "oklch(72.14% 0.11232 309.21)",
+          "oklch(83.57% 0.11232 309.21)",
+          "oklch(95% 0.11232 309.21)"
+        ]
+      },
+      "dark-stage": {
+        "role": "primary",
+        "displayName": "Dark Reading Stage",
+        "tonalRamp": [
+          "oklch(15% 0.02630 294.30)",
+          "oklch(26.43% 0.02630 294.30)",
+          "oklch(37.86% 0.02630 294.30)",
+          "oklch(49.29% 0.02630 294.30)",
+          "oklch(60.71% 0.02630 294.30)",
+          "oklch(72.14% 0.02630 294.30)",
+          "oklch(83.57% 0.02630 294.30)",
+          "oklch(95% 0.02630 294.30)"
+        ]
+      },
+      "dark-selection": {
+        "role": "primary",
+        "displayName": "Dark Selected Text",
+        "tonalRamp": [
+          "oklch(15% 0.09578 306.36)",
+          "oklch(26.43% 0.09578 306.36)",
+          "oklch(37.86% 0.09578 306.36)",
+          "oklch(49.29% 0.09578 306.36)",
+          "oklch(60.71% 0.09578 306.36)",
+          "oklch(72.14% 0.09578 306.36)",
+          "oklch(83.57% 0.09578 306.36)",
+          "oklch(95% 0.09578 306.36)"
+        ]
+      },
+      "dark-primary-ink": {
+        "role": "neutral",
+        "displayName": "Dark Action Ink",
+        "tonalRamp": [
+          "oklch(15% 0.04223 307.44)",
+          "oklch(26.43% 0.04223 307.44)",
+          "oklch(37.86% 0.04223 307.44)",
+          "oklch(49.29% 0.04223 307.44)",
+          "oklch(60.71% 0.04223 307.44)",
+          "oklch(72.14% 0.04223 307.44)",
+          "oklch(83.57% 0.04223 307.44)",
+          "oklch(95% 0.04223 307.44)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Home Display",
+        "purpose": "Home headline; responsive sizes are recorded in Layout and Typography."
+      },
+      "headline": {
+        "displayName": "Document Headline",
+        "purpose": "Documentation page titles."
+      },
+      "title": {
+        "displayName": "Document Section",
+        "purpose": "Reading hierarchy within documentation."
+      },
+      "body": {
+        "displayName": "Interface Body",
+        "purpose": "Native Chinese interface and supporting copy."
+      },
+      "prose": {
+        "displayName": "Reading Body",
+        "purpose": "Documentation text with generous line height."
+      },
+      "label": {
+        "displayName": "Navigation Label",
+        "purpose": "Desktop main navigation."
+      },
+      "sample-headline": {
+        "displayName": "English Sample Heading",
+        "purpose": "Georgia is confined to this demonstration heading."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Inline code; preformatted blocks define their own size."
+      }
+    },
+    "shadows": [
+      {
+        "name": "floating-light",
+        "value": "0 16px 40px -12px #25203e40",
+        "purpose": "Real software crop and mobile documentation overlays in light mode."
+      },
+      {
+        "name": "floating-dark",
+        "value": "0 18px 42px -12px #0009",
+        "purpose": "Theme override for floating software and documentation overlays."
+      },
+      {
+        "name": "dialog",
+        "value": "0 22px 80px #0003",
+        "purpose": "Native search and image dialogs; backdrop is #17132470."
+      },
+      {
+        "name": "mobile-navigation",
+        "value": "0 10px 20px -15px #0003",
+        "purpose": "Expanded phone main navigation."
+      }
+    ],
+    "motion": [
+      {
+        "name": "button-state",
+        "value": "background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease",
+        "purpose": "Button state feedback; disabled under reduced motion."
+      },
+      {
+        "name": "loading-pulse",
+        "value": "breathe 1.6s ease-in-out infinite alternate",
+        "purpose": "Skeleton opacity moves from 0.5 to 1; reduced motion uses a static 0.7."
+      },
+      {
+        "name": "anchor-scroll",
+        "value": "smooth",
+        "purpose": "Document anchors; auto under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide-home-min",
+        "value": "1600px"
+      },
+      {
+        "name": "compact-desktop-max",
+        "value": "1150px"
+      },
+      {
+        "name": "tablet-max",
+        "value": "850px"
+      },
+      {
+        "name": "phone-max",
+        "value": "640px"
+      },
+      {
+        "name": "narrow-phone-max",
+        "value": "360px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main download action; dark mode uses dark violet ink.",
+      "html": "<button class=\"ds-button ds-primary\">下载 STranslate</button>",
+      "css": ".ds-button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 22px; min-height: 48px; border-radius: 9px; font-size: 15px; font-weight: 600; line-height: 1.5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif; text-decoration: none; cursor: pointer; transition: background .18s ease, color .18s ease, box-shadow .18s ease; } .ds-button:disabled { opacity: .6; cursor: wait; } .ds-button:focus-visible { outline: 3px solid var(--brand, #7950a4); outline-offset: 4px; } @media (prefers-reduced-motion: reduce) { .ds-button { transition: none; } } .ds-primary { border: 0; background: var(--brand, #7950a4); color: #fff; } .ds-primary:hover { background: var(--brand-hover, #633989); } :host-context([data-theme=\"dark\"]) .ds-primary { color: #22172c; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Supporting navigation and retry actions.",
+      "html": "<button class=\"ds-button ds-secondary\">快速开始</button>",
+      "css": ".ds-button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 22px; min-height: 48px; border-radius: 9px; font-size: 15px; font-weight: 600; line-height: 1.5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif; text-decoration: none; cursor: pointer; transition: background .18s ease, color .18s ease, box-shadow .18s ease; } .ds-button:disabled { opacity: .6; cursor: wait; } .ds-button:focus-visible { outline: 3px solid var(--brand, #7950a4); outline-offset: 4px; } @media (prefers-reduced-motion: reduce) { .ds-button { transition: none; } } .ds-secondary { background: var(--bg, #fff); border: 1px solid var(--line, #e7e8ee); color: var(--text, #232530); } .ds-secondary:hover { background: var(--surface, #f6f7fa); border-color: var(--brand, #7950a4); }"
+    },
+    {
+      "name": "Icon Button",
+      "kind": "button",
+      "refersTo": "icon-button",
+      "description": "Compact header and dialog controls with explicit accessible names.",
+      "html": "<button class=\"ds-icon-button\" aria-label=\"搜索文档\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" aria-hidden=\"true\"><circle cx=\"10\" cy=\"10\" r=\"7\"/><path d=\"m15 15 6 6\"/></svg></button>",
+      "css": ".ds-icon-button { display: inline-flex; width: 38px; height: 38px; align-items: center; justify-content: center; border: 0; background: none; border-radius: 8px; color: var(--muted, #626674); cursor: pointer; } .ds-icon-button:hover { background: var(--surface, #f6f7fa); color: var(--text, #232530); } .ds-icon-button:focus-visible { outline: 3px solid var(--brand, #7950a4); outline-offset: 4px; }"
+    },
+    {
+      "name": "Document Search Field",
+      "kind": "input",
+      "refersTo": "search-field",
+      "description": "Named search input; focus belongs to the containing field.",
+      "html": "<label class=\"ds-search-field\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" aria-hidden=\"true\"><circle cx=\"10\" cy=\"10\" r=\"7\"/><path d=\"m15 15 6 6\"/></svg><input class=\"ds-search-input\" type=\"search\" aria-label=\"搜索使用文档\" placeholder=\"搜索翻译、OCR、插件…\"/><kbd class=\"ds-search-key\" aria-hidden=\"true\">Esc</kbd></label>",
+      "css": ".ds-search-field { display: flex; align-items: center; gap: 12px; background: var(--surface, #f6f7fa); padding: 12px 14px; border: 1px solid var(--line, #e7e8ee); border-radius: 8px; color: var(--muted, #626674); } .ds-search-field:focus-within { border-color: var(--brand, #7950a4); } .ds-search-input { border: 0; background: none; outline: none; width: 100%; min-width: 0; color: var(--text, #232530); font: 16px -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif; caret-color: var(--brand, #7950a4); } .ds-search-input::placeholder { color: var(--muted, #626674); opacity: 1; } .ds-search-input:focus-visible { outline: none; } .ds-search-key { font: 10px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif; border: 1px solid var(--line, #e7e8ee); border-radius: 4px; padding: 1px 5px; background: var(--bg, #fff); }"
+    },
+    {
+      "name": "Document Navigation",
+      "kind": "nav",
+      "refersTo": "nav-current",
+      "description": "Compact task navigation with a washed active row.",
+      "html": "<nav class=\"ds-doc-nav\" aria-label=\"文档导航\"><a class=\"ds-doc-link\" href=\"#getting-started\" aria-current=\"page\">快速开始</a><a class=\"ds-doc-link\" href=\"#translation\">文字翻译</a><a class=\"ds-doc-link\" href=\"#ocr\">截图与 OCR</a></nav>",
+      "css": ".ds-doc-nav { font: 12px/1.6 -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif; } .ds-doc-link { display: flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 6px; color: var(--muted, #626674); text-decoration: none; } .ds-doc-link:hover { color: var(--brand-text, #6e4097); background: var(--surface, #f6f7fa); } .ds-doc-link[aria-current] { background: var(--brand-soft, #f0eaf8); color: var(--brand-text, #6e4097); font-weight: 600; } .ds-doc-link:focus-visible { outline: 3px solid var(--brand, #7950a4); outline-offset: 4px; }"
+    },
+    {
+      "name": "Plugin Badges",
+      "kind": "chip",
+      "refersTo": "badge-official",
+      "description": "Non-interactive provenance labels; community and official variants.",
+      "html": "<span class=\"ds-badge ds-official\">官方</span> <span class=\"ds-badge\">社区</span>",
+      "css": ".ds-badge { display: inline-block; font: 10px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif; padding: 2px 7px; border-radius: 4px; background: var(--surface-2, #eef0f5); color: var(--muted, #626674); } .ds-official { color: var(--brand-text, #6e4097); background: var(--brand-soft, #f0eaf8); }"
+    },
+    {
+      "name": "Plugin Card",
+      "kind": "card",
+      "refersTo": "plugin-card",
+      "description": "Flat catalogue card; a monogram demonstrates the real fallback style.",
+      "html": "<article class=\"ds-plugin-card\"><div class=\"ds-card-top\"><span class=\"ds-plugin-fallback\" aria-hidden=\"true\">D</span><span class=\"ds-card-badge\">社区</span></div><h2 class=\"ds-card-title\">DeepL</h2><p class=\"ds-card-description\">翻译服务插件</p><div class=\"ds-card-actions\"><a class=\"ds-card-link\" href=\"#source\">查看源码</a><a class=\"ds-card-link ds-card-download\" href=\"#download\">下载</a></div></article>",
+      "css": ".ds-plugin-card { min-width: 0; display: flex; flex-direction: column; padding: 24px; border: 1px solid var(--line, #e7e8ee); border-radius: 14px; background: var(--bg, #fff); color: var(--text, #232530); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif; } .ds-plugin-card:hover { border-color: color-mix(in srgb, var(--brand, #7950a4) 45%, var(--line, #e7e8ee)); } .ds-card-top { display: flex; align-items: start; justify-content: space-between; gap: 12px; margin-bottom: 17px; } .ds-plugin-fallback { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-size: 23px; font-weight: 600; background: var(--brand-soft, #f0eaf8); color: var(--brand-text, #6e4097); border-radius: 10px; } .ds-card-badge { font-size: 10px; line-height: 1.5; padding: 2px 7px; border-radius: 4px; background: var(--surface-2, #eef0f5); color: var(--muted, #626674); } .ds-card-title { margin: 0; font-size: 17px; font-weight: 650; line-height: 1.35; letter-spacing: -.025em; overflow-wrap: anywhere; } .ds-card-description { font-size: 12px; color: var(--muted, #626674); line-height: 1.8; margin: 13px 0 18px; } .ds-card-actions { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 15px; border-top: 1px solid var(--line, #e7e8ee); font-size: 11px; } .ds-card-link { color: var(--muted, #626674); text-decoration: none; } .ds-card-link:hover { color: var(--brand-text, #6e4097); } .ds-card-download { color: var(--brand-text, #6e4097); font-weight: 600; background: var(--brand-soft, #f0eaf8); padding: 5px 10px; border-radius: 6px; } .ds-card-download:hover { background: var(--brand, #7950a4); color: var(--bg, #fff); } .ds-card-link:focus-visible { outline: 3px solid var(--brand, #7950a4); outline-offset: 4px; }"
+    },
+    {
+      "name": "Selected Reading Text",
+      "kind": "custom",
+      "description": "The live English sample and static selection cue; the product image remains a real repository crop.",
+      "html": "<article class=\"ds-sample\" lang=\"en\" aria-label=\"英文阅读演示\"><h2 class=\"ds-sample-heading\">A little curiosity.<br/>A whole new world.</h2><p class=\"ds-sample-copy\">Every new beginning starts with a simple <mark class=\"ds-selection\">hello world</mark>.</p></article>",
+      "css": ".ds-sample { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif; color: var(--text, #232530); } .ds-sample-heading { font-family: Georgia, \"Times New Roman\", serif; font-size: 34px; line-height: 1.15; font-weight: 500; letter-spacing: -.035em; margin: 18px 0; } .ds-sample-copy { font-size: 12px; line-height: 1.9; max-width: 410px; margin-top: 13px; color: var(--muted, #626674); } .ds-selection { background: var(--selection, #e5d6f4); color: var(--brand-text, #6e4097); padding: 3px 2px; border-radius: 2px; } :host-context([data-theme=\"dark\"]) .ds-selection { color: var(--text, #ececf3); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "选中 → 读懂",
+    "overview": "A quiet reading surface makes understanding feel immediate. Cold white and graphite support the original purple logo; purple identifies selection, the main action and the current location. Native Chinese sans keeps the interface familiar, while genuine software screenshots supply the product's visual proof.\n\nThe same restrained materials support an expansive home scene, a denser documentation reader and a practical plugin catalogue. This records the accepted implementation, not a new direction. The pinned contract is the first body child in `src/layouts/Base.astro` (seed `e311debb`, user direction overrides the roll).",
+    "keyCharacteristics": [
+      "Calm reading rhythm and conventional, visible controls.",
+      "Purple selection and authentic software media.",
+      "Flat surfaces with soft depth reserved for floating software and overlays.",
+      "Complete light and dark themes, native Chinese type and responsive layouts."
+    ],
+    "rules": [
+      {
+        "name": "The Semantic Theme Rule",
+        "body": "Switch every shared role through the CSS theme overrides; do not apply a light-only neutral to new interface text or surfaces.",
+        "section": "colors"
+      },
+      {
+        "name": "The Local Serif Rule",
+        "body": "Keep Georgia inside the English sample heading; Chinese interface headings and documentation remain native sans.",
+        "section": "typography"
+      },
+      {
+        "name": "The Earned Depth Rule",
+        "body": "Reserve cast shadows for genuinely floating software and overlays, rather than every content block.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** preserve the original STranslate purple logo and use semantic theme roles.",
+      "**Do** keep Chinese reading copy native sans, selectable and comfortably spaced.",
+      "**Do** keep genuine media, explicit demonstration labels and complete in-flow captions.",
+      "**Do** preserve keyboard focus, conventional navigation and reduced-motion behavior.",
+      "**Do** update both design artifacts from the actual CSS and components after visual changes."
+    ],
+    "donts": [
+      "**Don't** spread the sample article's Georgia heading style into the Chinese interface.",
+      "**Don't** fabricate software UI, provider logos, testimonials or performance claims.",
+      "**Don't** add autoplay, entrance choreography or decorative card shadows.",
+      "**Don't** reintroduce Giscus, download mirrors, old-address aliases or a legacy-entry directory; downloads and feedback use GitHub and documentation uses the new task navigation."
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import PluginMarket from '../components/PluginMarket.vue';
+import repos from '../data/plugins.json';
+---
+
+<Base
+  title="插件市场"
+  description="发现官方与社区维护的翻译、OCR、TTS 和生词本插件，按自己的习惯扩展 STranslate。"
+>
+  <main id="main-content" class="market-page wrap">
+    <header class="market-page-heading">
+      <div>
+        <h1>把顺手，再扩展一点。</h1>
+        <p>
+          翻译、识别、朗读与生词本。
+          <br class="mobile-break" />
+          发现适合你的服务，组合自己的 STranslate。
+        </p>
+      </div>
+      <a
+        class="text-link"
+        href="https://github.com/STranslate/STranslate-doc#提交插件"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <Icon name="puzzle" size={18} />
+        提交你的插件
+        <Icon name="arrow" size={16} />
+      </a>
+    </header>
+    <h2 class="sr-only">插件市场</h2>
+    <PluginMarket repos={repos} client:load />
+    <noscript>
+      <div class="market-notice">
+        插件列表需要 JavaScript 获取最新信息。你也可以
+        <a href="https://github.com/STranslate">直接浏览 GitHub 插件仓库</a>。
+      </div>
+    </noscript>
+    <section class="install-strip">
+      <div>
+        <h2>找到喜欢的，然后拖进去。</h2>
+        <p>
+          下载 <code>.spkg</code> 文件，打开 STranslate 的「设置 → 插件」，拖入即可安装。
+        </p>
+      </div>
+      <a href="/docs/plugins/" class="text-link">
+        查看安装指南
+        <Icon name="right" size={18} />
+      </a>
+    </section>
+  </main>
+</Base>

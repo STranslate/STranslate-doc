@@ -1,0 +1,73 @@
+---
+import Header from '../components/Header.astro';
+import Search from '../components/Search.astro';
+import Icon from '../components/Icon.astro';
+import '../styles/global.css';
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+}
+const {
+  title,
+  description = 'STranslate，一款即用即走的 Windows 翻译与 OCR 工具。探索使用文档和社区插件，让语言不再打断思路。',
+  canonical,
+} = Astro.props;
+const pageTitle = title ? `${title} · STranslate` : 'STranslate — 选中，即刻读懂。';
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#8250b5" />
+    <link rel="icon" href="/logo/favicon.ico" />
+    <link rel="canonical" href={new URL(canonical || Astro.url.pathname, Astro.site)} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <script is:inline>
+      (() => {
+        let theme;
+        try {
+          theme = localStorage.getItem('stranslate-theme');
+        } catch {}
+        document.documentElement.dataset.theme =
+          theme === 'dark' || theme === 'light'
+            ? theme
+            : matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+      })();
+    </script>
+  </head>
+  <body>
+    <!-- THESIS: Selected text becomes understanding, demonstrated in an expansive reading scene. OWN-WORLD: Cold white, graphite, purple selection; system Chinese sans; soft floating native software above a flat reading surface. STORY: Understand the Windows tool, download, configure, extend. FIRST VIEWPORT: Centered headline and download above a wide article with a real translation window overlapping right. FORM: User-pinned reading canvas; seed e311debb overridden by the confirmed brief. FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md -->
+    <a class="skip-link" href="#main-content">
+      跳到主要内容
+    </a>
+    <Header />
+    <slot />
+    <footer class="site-footer" data-pagefind-ignore>
+      <div class="footer-inner">
+        <a href="/" class="brand">
+          <img src="/logo/logo.svg" alt="" width="24" height="24" />
+          <span>STranslate</span>
+        </a>
+        <p>即用即走，让理解自然发生。</p>
+        <div>
+          <a href="/docs/support/">反馈与支持</a>
+          <a href="https://github.com/STranslate/STranslate" target="_blank" rel="noreferrer">
+            GitHub <Icon name="arrow" size={14} />
+          </a>
+        </div>
+        <small>© 2024–{new Date().getFullYear()} ZGGSONG</small>
+      </div>
+    </footer>
+    <Search />
+  </body>
+</html>

@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+---
+
+<Base title="页面未找到">
+  <main id="main-content" class="not-found wrap">
+    <span class="error-number">404</span>
+    <h1>这页，暂时没找到。</h1>
+    <p>链接可能已经更新。试试搜索文档，或者从首页重新出发。</p>
+    <div class="hero-actions">
+      <a class="button primary" href="/">
+        返回首页
+        <Icon name="right" size={18} />
+      </a>
+      <button class="button secondary" data-open-search>
+        <Icon name="search" size={18} />
+        搜索文档
+      </button>
+    </div>
+  </main>
+</Base>

@@ -1,0 +1,39 @@
+---
+import Docs from '../../layouts/Docs.astro';
+import Icon from '../../components/Icon.astro';
+import { groups, orderedDocs } from '../../lib/docs';
+const docs = await orderedDocs();
+---
+
+<Docs
+  title="把 STranslate 用得更顺手。"
+  description="从第一次翻译，到自己的工作流。在这里，找到你需要的使用方法。"
+  next={{ id: 'getting-started', title: '快速开始' }}
+>
+  <a class="docs-start-banner" href="/docs/getting-started/">
+    <div>
+      <Icon name="book" size={26} />
+      <h2>第一次使用？从这里开始。</h2>
+      <p>下载、配置，到完成第一次翻译。</p>
+    </div>
+    <Icon name="right" size={24} />
+  </a>
+  <div class="docs-index-groups">
+    {groups.map((group) => (
+      <section>
+        <h2>{group}</h2>
+        {docs
+          .filter((doc) => doc.data.group === group)
+          .map((doc) => (
+            <a href={`/docs/${doc.id}/`}>
+              <div>
+                <h3>{doc.data.title}</h3>
+                <p>{doc.data.description}</p>
+              </div>
+              <Icon name="right" size={17} />
+            </a>
+          ))}
+      </section>
+    ))}
+  </div>
+</Docs>

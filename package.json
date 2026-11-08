@@ -1,15 +1,34 @@
 {
-  "devDependencies": {
-    "vitepress": "^1.0.0-rc.45"
+  "name": "stranslate-doc",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.23.4"
   },
   "scripts": {
-    "dev": "vitepress dev vitepress",
-    "build": "vitepress build vitepress",
-    "preview": "vitepress preview vitepress",
+    "dev": "astro dev",
+    "build": "astro check && astro build && pagefind --site dist --force-language zh-cn && node scripts/check-links.mjs",
+    "preview": "astro preview",
+    "check": "astro check",
+    "format": "prettier --write src scripts tests astro.config.mjs playwright.config.ts *.json *.md",
+    "test": "node --test tests/*.test.mjs",
+    "test:e2e": "playwright test",
     "validate:plugins": "node scripts/validate-plugins.cjs"
   },
   "dependencies": {
-    "axios": "^1.6.8",
-    "vitepress-plugin-comment-with-giscus": "^1.1.15"
+    "@astrojs/sitemap": "3.7.4",
+    "@astrojs/vue": "7.1.2",
+    "astro": "7.4.7",
+    "vue": "3.5.45"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.56.1",
+    "pagefind": "1.6.0",
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.2",
+    "typescript": "^5.9.3"
   }
 }
