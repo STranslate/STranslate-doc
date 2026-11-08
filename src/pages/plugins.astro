@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
-import PluginMarket from '../components/PluginMarket.vue';
+import PluginMarket from '../components/PluginMarket.astro';
 import repos from '../data/plugins.json';
 ---
 
@@ -31,7 +31,7 @@ import repos from '../data/plugins.json';
       </a>
     </header>
     <h2 class="sr-only">插件市场</h2>
-    <PluginMarket repos={repos} client:load />
+    <PluginMarket repos={repos} />
     <noscript>
       <div class="market-notice">
         插件列表需要 JavaScript 获取最新信息。你也可以

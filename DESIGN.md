@@ -140,7 +140,7 @@ The same restrained materials support an expansive home scene, a denser document
 - Flat surfaces with soft depth reserved for floating software and overlays.
 - Complete light and dark themes, native Chinese type and responsive layouts.
 
-Source of truth: `src/styles/global.css`, `src/layouts/{Base,Docs}.astro`, `src/components/{Header,Search,DocNavigation}.astro`, `src/components/PluginMarket.vue` and `src/pages/{index,plugins}.astro`. `PRODUCT.md` owns product commitments; `.impeccable/surface-brief.md` owns surface strategy. When these visual sources change, regenerate this file and `.impeccable/design.json` together. The frontmatter owns primitives; the sidecar owns previews and extensions. Its synthesized tonal ramps are preview aids, not additional CSS tokens.
+Source of truth: `src/styles/global.css`, `src/layouts/{Base,Docs}.astro`, `src/components/{Header,Search,DocNavigation}.astro`, `src/components/PluginMarket.astro` and `src/pages/{index,plugins}.astro`. `PRODUCT.md` owns product commitments; `.impeccable/surface-brief.md` owns surface strategy. When these visual sources change, regenerate this file and `.impeccable/design.json` together. The frontmatter owns primitives; the sidecar owns previews and extensions. Its synthesized tonal ramps are preview aids, not additional CSS tokens.
 
 ## Colors
 

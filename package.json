@@ -18,9 +18,7 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.4",
-    "@astrojs/vue": "7.1.2",
-    "astro": "7.4.7",
-    "vue": "3.5.45"
+    "astro": "7.4.7"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",

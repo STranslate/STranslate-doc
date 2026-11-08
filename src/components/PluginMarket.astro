@@ -1,0 +1,296 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  repos: string[];
+}
+const { repos } = Astro.props;
+const categories = [
+  { key: 'All', label: '全部插件' },
+  { key: 'Translate', label: '翻译' },
+  { key: 'Ocr', label: 'OCR' },
+  { key: 'Tts', label: 'TTS' },
+  { key: 'Vocabulary', label: '生词本' },
+];
+---
+
+<div class="market-app" data-plugin-market data-repos={JSON.stringify(repos)}>
+  <div class="market-toolbar">
+    <label class="market-search">
+      <Icon name="search" size={19} />
+      <span class="sr-only">搜索插件名称、描述或作者</span>
+      <input type="search" placeholder="搜索名称、描述或作者…" />
+      <kbd>/</kbd>
+    </label>
+    <span class="market-total">
+      {repos.length} 个已收录仓库<span aria-hidden="true"> · </span>持续生长的插件生态
+    </span>
+  </div>
+  <div class="market-filter-row">
+    <div class="category-tabs" aria-label="筛选插件分类">
+      {categories.map((item) => (
+        <button data-category={item.key} aria-pressed={item.key === 'All'}>
+          {item.label}
+          <span data-category-count hidden />
+        </button>
+      ))}
+    </div>
+    <span class="results-count" role="status">
+      正在加载 · 还剩 {repos.length} 个
+    </span>
+  </div>
+  <div class="market-notice" role="status" data-failures hidden>
+    <div>
+      <strong></strong>
+      <p>其他插件仍可正常使用。请检查网络后重试，或直接前往 GitHub。</p>
+    </div>
+    <button class="button secondary small" data-retry>
+      重试失败项
+    </button>
+  </div>
+  <div class="plugins-grid" aria-busy="true"></div>
+  <div class="market-empty" hidden>
+    <Icon name="search" size={34} />
+    <h2></h2>
+    <p></p>
+    <button class="button secondary small" data-reset>
+      清除筛选条件
+    </button>
+    <a class="text-link" href="https://github.com/STranslate" target="_blank" rel="noreferrer">
+      前往 GitHub 组织
+    </a>
+  </div>
+  <details class="failed-repos" hidden>
+    <summary>查看暂未加载的仓库</summary>
+    <ul></ul>
+  </details>
+  <template data-card-template>
+    <article class="plugin-card">
+      <div class="plugin-card-top">
+        <img alt="" width="44" height="44" loading="lazy" />
+        <span class="plugin-badge"></span>
+      </div>
+      <h2></h2>
+      <p class="plugin-author"></p>
+      <p class="plugin-description"></p>
+      <div class="plugin-tags">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="plugin-card-actions">
+        <a data-source target="_blank" rel="noreferrer">
+          查看源码
+          <Icon name="arrow" size={13} />
+        </a>
+        <a class="plugin-download">
+          <Icon name="download" size={15} />
+          下载
+        </a>
+      </div>
+    </article>
+  </template>
+  <template data-skeleton-template>
+    <div class="plugin-card skeleton-card" aria-hidden="true">
+      <div class="skeleton sk-icon"></div>
+      <div class="skeleton sk-title"></div>
+      <div class="skeleton sk-line"></div>
+      <div class="skeleton sk-line"></div>
+      <div class="skeleton sk-short"></div>
+    </div>
+  </template>
+</div>
+
+<style>
+  .market-app :global([hidden]) {
+    display: none !important;
+  }
+</style>
+
+<script>
+  import { loadPlugin, filterPlugins, type Plugin, type PluginCategory } from '../lib/plugins';
+
+  const labels: Record<PluginCategory, string> = {
+    Translate: '翻译',
+    Ocr: 'OCR',
+    Tts: 'TTS',
+    Vocabulary: '生词本',
+    Other: '扩展',
+  };
+
+  function initMarket(root: HTMLElement) {
+    const repos: string[] = JSON.parse(root.dataset.repos!);
+    const input = root.querySelector<HTMLInputElement>('input')!;
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[data-category]')];
+    const status = root.querySelector<HTMLElement>('.results-count')!;
+    const grid = root.querySelector<HTMLElement>('.plugins-grid')!;
+    const notice = root.querySelector<HTMLElement>('[data-failures]')!;
+    const retry = root.querySelector<HTMLButtonElement>('[data-retry]')!;
+    const empty = root.querySelector<HTMLElement>('.market-empty')!;
+    const reset = root.querySelector<HTMLButtonElement>('[data-reset]')!;
+    const github = empty.querySelector<HTMLAnchorElement>('a')!;
+    const failedRepos = root.querySelector<HTMLDetailsElement>('.failed-repos')!;
+    const cardTemplate = root.querySelector<HTMLTemplateElement>('[data-card-template]')!;
+    const skeletonTemplate = root.querySelector<HTMLTemplateElement>('[data-skeleton-template]')!;
+    const controller = new AbortController();
+    const plugins = new Map<string, Plugin>();
+    const cards = new Map<string, HTMLElement>();
+    let failures: string[] = [];
+    let pending = 0;
+    const params = new URLSearchParams(location.search);
+    input.value = params.get('q') || '';
+    let category = tabs.some((tab) => tab.dataset.category === params.get('category'))
+      ? params.get('category')!
+      : 'All';
+
+    function createCard(plugin: Plugin) {
+      const card = cardTemplate.content.firstElementChild!.cloneNode(true) as HTMLElement;
+      const image = card.querySelector('img')!;
+      image.addEventListener(
+        'error',
+        () => {
+          const fallback = document.createElement('span');
+          fallback.className = 'plugin-fallback';
+          fallback.setAttribute('aria-hidden', 'true');
+          fallback.textContent = plugin.name.slice(0, 1);
+          image.replaceWith(fallback);
+        },
+        { once: true },
+      );
+      image.src = plugin.iconUrl;
+      const badge = card.querySelector<HTMLElement>('.plugin-badge')!;
+      badge.classList.toggle('official', plugin.official);
+      badge.textContent = plugin.official ? '官方' : '社区';
+      card.querySelector('h2')!.textContent = plugin.name;
+      card.querySelector('.plugin-author')!.textContent = plugin.author;
+      card.querySelector('.plugin-description')!.textContent = plugin.description;
+      const tags = card.querySelectorAll('.plugin-tags span');
+      tags[0].textContent = labels[plugin.category];
+      tags[1].textContent = `v${plugin.version}`;
+      const source = card.querySelector<HTMLAnchorElement>('[data-source]')!;
+      source.href = plugin.website;
+      source.setAttribute('aria-label', `查看 ${plugin.name} 源码`);
+      const download = card.querySelector<HTMLAnchorElement>('.plugin-download')!;
+      download.href = plugin.downloadUrl;
+      download.setAttribute('aria-label', `下载 ${plugin.name}`);
+      return card;
+    }
+
+    function render() {
+      const ordered = repos.flatMap((entry) => {
+        const plugin = plugins.get(entry);
+        return plugin ? [plugin] : [];
+      });
+      const filtered = filterPlugins(ordered, input.value, category);
+      const loading = pending > 0;
+      for (const tab of tabs) {
+        const key = tab.dataset.category!;
+        tab.setAttribute('aria-pressed', String(category === key));
+        const count = tab.querySelector<HTMLElement>('[data-category-count]')!;
+        count.hidden = !plugins.size;
+        count.textContent = String(
+          key === 'All' ? plugins.size : ordered.filter((p) => p.category === key).length,
+        );
+      }
+      status.textContent = loading
+        ? `正在加载 · 还剩 ${pending} 个`
+        : `显示 ${filtered.length} 个插件`;
+      grid.setAttribute('aria-busy', String(loading));
+
+      // Keep existing cards so loading updates preserve focus and broken-icon fallbacks.
+      const visibleCards = filtered.map((plugin) => {
+        let card = cards.get(plugin.entry);
+        if (!card) {
+          card = createCard(plugin);
+          cards.set(plugin.entry, card);
+        }
+        return card;
+      });
+      const visible = new Set(visibleCards);
+      for (const child of [...grid.children]) {
+        if (!visible.has(child as HTMLElement)) child.remove();
+      }
+      visibleCards.forEach((card, index) => {
+        if (grid.children[index] !== card) grid.insertBefore(card, grid.children[index] || null);
+      });
+      if (loading) {
+        for (let i = 0; i < Math.min(pending, 3); i++) {
+          grid.append(skeletonTemplate.content.cloneNode(true));
+        }
+      }
+
+      notice.hidden = !failures.length;
+      notice.querySelector('strong')!.textContent = plugins.size
+        ? `${failures.length} 个插件暂时无法获取`
+        : '暂时无法连接插件仓库';
+      retry.disabled = loading;
+      retry.textContent = loading ? '加载中…' : '重试失败项';
+      empty.hidden = loading || filtered.length > 0;
+      empty.querySelector('h2')!.textContent = plugins.size
+        ? '没有找到匹配的插件'
+        : '插件信息暂时无法加载';
+      empty.querySelector('p')!.textContent = plugins.size
+        ? '换个关键词，或者查看其他分类。'
+        : '插件由 GitHub 提供，请检查网络连接后重试。';
+      reset.hidden = !plugins.size;
+      github.hidden = !!plugins.size;
+      failedRepos.hidden = !failures.length;
+      failedRepos.querySelector('ul')!.replaceChildren(
+        ...failures.map((entry) => {
+          const item = document.createElement('li');
+          const link = document.createElement('a');
+          link.href = `https://github.com/${entry.includes('/') ? entry : `STranslate/${entry}`}`;
+          link.target = '_blank';
+          link.rel = 'noreferrer';
+          link.textContent = entry;
+          item.append(link);
+          return item;
+        }),
+      );
+    }
+
+    async function load(entries: string[]) {
+      if (pending > 0 || controller.signal.aborted) return;
+      failures = failures.filter((entry) => !entries.includes(entry));
+      pending = entries.length;
+      render();
+      let cursor = 0;
+      await Promise.all(
+        Array.from({ length: Math.min(4, entries.length) }, async () => {
+          while (cursor < entries.length && !controller.signal.aborted) {
+            const entry = entries[cursor++];
+            try {
+              const plugin = await loadPlugin(entry, controller.signal);
+              if (!controller.signal.aborted) plugins.set(entry, plugin);
+            } catch {
+              if (!controller.signal.aborted) failures.push(entry);
+            } finally {
+              pending--;
+              if (!controller.signal.aborted) render();
+            }
+          }
+        }),
+      );
+    }
+
+    input.addEventListener('input', render);
+    for (const tab of tabs) {
+      tab.addEventListener('click', () => {
+        category = tab.dataset.category!;
+        render();
+      });
+    }
+    retry.addEventListener('click', () => void load([...failures]));
+    reset.addEventListener('click', () => {
+      input.value = '';
+      category = 'All';
+      render();
+      input.focus();
+    });
+    window.addEventListener('pagehide', (event) => {
+      if (!event.persisted) controller.abort();
+    });
+    void load(repos);
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-plugin-market]').forEach(initMarket);
+</script>

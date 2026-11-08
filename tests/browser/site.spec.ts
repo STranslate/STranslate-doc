@@ -94,7 +94,9 @@ for (const [name, width, height] of [
     await noOverflow(page);
     await capture(page, `plugins-${name}`);
     await page.getByRole('button', { name: /^OCR/ }).click();
-    await expect(page.locator('.plugin-card')).toHaveCount(7);
+    await expect(page.locator('.plugin-card')).toHaveCount(
+      repos.filter((entry) => entry.includes('.Ocr.')).length,
+    );
     await page.getByRole('searchbox', { name: '搜索插件名称、描述或作者' }).fill('没有匹配的内容');
     await expect(page.getByText('没有找到匹配的插件')).toBeVisible();
     await page.getByRole('button', { name: '清除筛选条件' }).click();
@@ -139,6 +141,105 @@ test('total outage is distinguishable from no search matches', async ({ page }) 
   await expect(page.getByText('插件信息暂时无法加载', { exact: true })).toBeVisible();
   await expect(page.getByRole('button', { name: '重试失败项' })).toBeEnabled();
   await expect(page.getByText('没有找到匹配的插件', { exact: true })).not.toBeVisible();
+  await page.unroute('https://raw.githubusercontent.com/**');
+  await mockPlugins(page);
+  await page.getByRole('button', { name: '重试失败项' }).click();
+  await expect(page.locator('.results-count')).toHaveText(`显示 ${repos.length} 个插件`);
+  await expect(page.locator('.market-empty')).not.toBeVisible();
+  await expect(page.locator('.failed-repos')).not.toBeVisible();
+});
+
+test('plugins load progressively with bounded concurrency and preserve card focus and order', async ({
+  page,
+}) => {
+  const waiting = new Map<string, () => void>();
+  let releaseAll = false;
+  let active = 0;
+  let peak = 0;
+  await page.route('https://raw.githubusercontent.com/**', async (route) => {
+    const pathname = new URL(route.request().url()).pathname;
+    if (pathname.endsWith('.png')) return route.abort();
+    if (pathname.endsWith('zh-cn.json')) return route.fulfill({ status: 404, body: '' });
+    const repo = pathname.split('/')[2];
+    active++;
+    peak = Math.max(peak, active);
+    if (!releaseAll) await new Promise<void>((resolve) => waiting.set(repo, resolve));
+    await route.fulfill({ json: { Name: repo, Version: '1.0.0' } });
+    active--;
+  });
+  await page.goto('/plugins/');
+  await expect.poll(() => waiting.size).toBe(4);
+  await expect(page.locator('.skeleton-card')).toHaveCount(3);
+  await expect(page.locator('.market-empty')).not.toBeVisible();
+  waiting.get(repos[1].split('/').at(-1)!)!();
+  await expect(page.locator('article.plugin-card')).toHaveCount(1);
+  const source = page.getByRole('link', {
+    name: `查看 ${repos[1].split('/').at(-1)!} 源码`,
+    exact: true,
+  });
+  await source.focus();
+  waiting.get(repos[2].split('/').at(-1)!)!();
+  await expect(page.locator('article.plugin-card')).toHaveCount(2);
+  await expect(source).toBeFocused();
+  releaseAll = true;
+  for (const release of waiting.values()) release();
+  await expect(page.locator('.results-count')).toHaveText(`显示 ${repos.length} 个插件`);
+  await expect(page.locator('article.plugin-card h2')).toHaveText(
+    repos.map((entry) => entry.split('/').at(-1)!),
+  );
+  await expect(source).toBeFocused();
+  expect(peak).toBe(4);
+});
+
+test('plugin URL filters combine with author and description searches', async ({ page }) => {
+  await mockPlugins(page);
+  await page.goto('/plugins/?q=STranslate&category=Ocr');
+  const expected = repos.filter(
+    (entry) => entry.includes('.Ocr.') && (!entry.includes('/') || entry.startsWith('STranslate/')),
+  ).length;
+  await expect(page.locator('.results-count')).toHaveText(`显示 ${expected} 个插件`);
+  await expect(page.getByRole('button', { name: /^OCR/ })).toHaveAttribute('aria-pressed', 'true');
+  const search = page.getByRole('searchbox', { name: '搜索插件名称、描述或作者' });
+  await expect(search).toHaveValue('STranslate');
+  await search.fill('文本识别');
+  await expect(page.locator('article.plugin-card')).toHaveCount(
+    repos.filter((entry) => entry.includes('.Ocr.')).length,
+  );
+  await page.getByRole('button', { name: /^翻译/ }).click();
+  await expect(page.getByText('没有找到匹配的插件', { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: '清除筛选条件' }).click();
+  await expect(search).toBeFocused();
+  await expect(page.locator('article.plugin-card')).toHaveCount(repos.length);
+  await page.goto('/plugins/?category=invalid');
+  await expect(page.locator('.results-count')).toHaveText(`显示 ${repos.length} 个插件`);
+  await expect(page.getByRole('button', { name: /^全部插件/ })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+});
+
+test('plugin metadata is displayed as text and download links retain the release contract', async ({
+  page,
+}) => {
+  const name = '<img src=x onerror="alert(1)">';
+  const description = '<script>alert(1)</script> & 插件说明';
+  await page.route('https://raw.githubusercontent.com/**', async (route) => {
+    const pathname = new URL(route.request().url()).pathname;
+    if (pathname.endsWith('.png')) return route.abort();
+    if (pathname.endsWith('zh-cn.json')) return route.fulfill({ status: 404, body: '' });
+    return route.fulfill({ json: { Name: name, Description: description, Version: '2.3.4' } });
+  });
+  await page.goto('/plugins/');
+  await expect(page.locator('.results-count')).toHaveText(`显示 ${repos.length} 个插件`);
+  const card = page.locator('article.plugin-card').first();
+  await expect(card.locator('h2')).toHaveText(name);
+  await expect(card.locator('.plugin-description')).toHaveText(description);
+  await expect(card.locator('h2 img, .plugin-description script')).toHaveCount(0);
+  const fullRepo = repos[0].includes('/') ? repos[0] : `STranslate/${repos[0]}`;
+  await expect(card.locator('.plugin-download')).toHaveAttribute(
+    'href',
+    `https://github.com/${fullRepo}/releases/download/v2.3.4/${fullRepo.split('/')[1]}.spkg`,
+  );
 });
 
 test('tutorial media uses controls and no automatic video loading', async ({ page }) => {

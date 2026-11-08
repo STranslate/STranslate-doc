@@ -6,10 +6,10 @@
 
 这是 STranslate 官方中文网站与文档仓库，包含产品首页、使用文档和插件市场，不是桌面客户端源码。
 
-- 技术栈：Astro 静态生成、TypeScript、Vue、原生 CSS、Markdown 内容集合、Pagefind 中文搜索。
+- 技术栈：Astro 静态生成、TypeScript、原生 CSS、Markdown 内容集合、Pagefind 中文搜索。
 - 运行环境：使用 Node.js 24 和 npm，以 `package-lock.json` 锁定依赖。
 - 部署目标：Cloudflare Pages，构建命令为 `npm run build`，输出目录为 `dist`。
-- 保持静态站架构，按需使用 Vue 交互组件，不擅自增加后端、数据库、账户或在线翻译接口。
+- 保持静态站架构，交互使用 Astro 组件中的浏览器端 TypeScript，不擅自增加后端、数据库、账户或在线翻译接口。
 
 开始工作前，按任务需要阅读：
 
@@ -75,7 +75,7 @@
 
 - `src/data/plugins.json` 保持字符串数组，支持默认官方组织的仓库名和 `作者/仓库名` 两种形式。
 - 插件增删以用户要求和收录流程为准，不自动补回已经删除的条目；不要在其他文件复制一份清单。
-- 元数据读取与下载地址生成逻辑维护在 `src/lib/plugins.ts`，界面维护在 `src/components/PluginMarket.vue`。
+- 元数据读取与下载地址生成逻辑维护在 `src/lib/plugins.ts`，界面与浏览器端交互维护在 `src/components/PluginMarket.astro`。
 - 保留 `main`、`master` 分支回退和可选中文本地化。名称、描述、作者搜索需要与分类筛选组合使用。
 - 保持有限并发、超时、逐项展示和失败重试；部分仓库失败不能隐藏已经成功加载的插件。
 - 区分初次加载、搜索无匹配、部分失败和全部失败，缺失图标使用现有回退样式。

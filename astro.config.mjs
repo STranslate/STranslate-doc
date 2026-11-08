@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import vue from '@astrojs/vue';
 import sitemap from '@astrojs/sitemap';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -36,7 +35,7 @@ export default defineConfig({
   site: 'https://stranslate.zggsong.com',
   output: 'static',
   trailingSlash: 'always',
-  integrations: [vue(), sitemap()],
+  integrations: [sitemap()],
   markdown: {
     shikiConfig: { themes: { light: 'github-light', dark: 'github-dark-high-contrast' } },
   },

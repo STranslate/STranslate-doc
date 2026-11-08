@@ -16,7 +16,7 @@ STranslate 官方网站与使用文档。帮助用户理解「即用即走」的
 
 ## Capabilities and Constraints
 
-Astro 静态生成，TypeScript、Vue 交互组件、原生 CSS、Markdown 内容集合、Pagefind 中文本地搜索。用户在实施中明确无需兼容旧文档入口：不生成旧地址别名、旧锚点跳转或旧版入口列表。支持 Cloudflare Pages 和 Vercel。不增加后端、账户、数据库或在线翻译接口。删除 Giscus 评论及所有下载镜像功能，下载和反馈链接到 GitHub。
+Astro 静态生成，浏览器端 TypeScript 交互、原生 CSS、Markdown 内容集合、Pagefind 中文本地搜索。用户在实施中明确无需兼容旧文档入口：不生成旧地址别名、旧锚点跳转或旧版入口列表。支持 Cloudflare Pages 和 Vercel。不增加后端、账户、数据库或在线翻译接口。删除 Giscus 评论及所有下载镜像功能，下载和反馈链接到 GitHub。
 
 ## Brand Commitments
 

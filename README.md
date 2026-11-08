@@ -1,6 +1,6 @@
 # STranslate 官方网站与文档
 
-基于 Astro、TypeScript、Vue 与原生 CSS 构建的中文静态站点。包含产品首页、Markdown 使用文档和社区插件市场。
+基于 Astro、TypeScript 与原生 CSS 构建的中文静态站点。包含产品首页、Markdown 使用文档和社区插件市场，交互由浏览器端 TypeScript 实现。
 
 ## 本地开发
 
@@ -24,7 +24,7 @@ npm run test:e2e
 
 - `src/content/docs/`：Markdown 文档。frontmatter 中的 `title`、`description`、`group`、`order` 控制页面信息和导航顺序。
 - `src/data/plugins.json`：插件仓库清单，保持字符串数组格式。市场在浏览器端请求 GitHub 元数据，不需要 token 或后端。
-- `src/components/`、`src/layouts/`：共享导航、搜索、文档布局和 Vue 插件市场。
+- `src/components/`、`src/layouts/`：共享导航、搜索、文档布局和 Astro 插件市场。
 - `src/styles/global.css`：深浅主题变量、响应式布局与组件样式。
 - `public/img/`：产品截图；`public/media/`：实际录屏转码后的 MP4、封面和首页截图。
 - `scripts/check-links.mjs`：构建后检查站内链接、标题锚点和媒体文件。文档统一使用新入口，不维护旧地址跳转。
