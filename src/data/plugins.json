@@ -37,5 +37,6 @@
   "jarxunlai/STranslate.Plugin.Tts.OpenAICompatible",
   "DejavuMoe/STranslate.Plugin.Tts.edgeTTS",
   "SuperShowMaker/STranslate.Plugin.Tts.Qwen3TTS",
-  "jiapengchen-dev/STranslate.Plugin.Tts.DeepSeek"
+  "jiapengchen-dev/STranslate.Plugin.Tts.DeepSeek",
+  "monbed/STranslate.Plugin.Ocr.DeepSeek"
 ]
